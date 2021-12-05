@@ -1,8 +1,7 @@
 import React from "react";
 import logoPng from "../../img/logo.png"
-import exitPng from "../../img/exit.png"
-import settingPng from "../../img/Setting.png"
 import {NavLink} from "react-router-dom";
+import {navGroup1, navGroup2} from "../../store/navStore";
 
 
 
@@ -12,38 +11,20 @@ export const Aside = () => {
             <div>
                 <img alt="logo" src={logoPng}/>
                 <ul className="pt-5 nav nav-pills flex-column">
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName= "active" exact to="/">Launch Guide</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName= "active" to="/invite-your-team">Invite Your Team</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName= "active" to="/team-reports">Team Reports</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName= "active" to="/my-reports">My Reports</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName= "active" to="/fill-out-a-report">Fill out a Report</NavLink>
-                    </li>
+                    {navGroup1.map((item, index)=> (
+                        <li key={index} className="nav-item">
+                            <NavLink className={item.IsMarked?"nav-link marked":"nav-link"} activeClassName= "active" exact={item.isExact} to={item.Link}>{item.Text}</NavLink>
+                        </li>
+                    ))}
                 </ul>
             </div>
             <div>
                 <ul className="nav nav-pills flex-column">
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName= "active" to="/back-to-elite">Back to Elite</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" activeClassName= "active" to="/my-company">My Company</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
-                            <img src={settingPng} alt="icon"/>My Profile</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#"><img src={exitPng} alt="icon"/>Sign Out</a>
-                    </li>
+                    {navGroup2.map((item, index)=> (
+                        <li key={index} className="nav-item">
+                            <NavLink className="nav-link" activeClassName= "active" to={item.Link}>{item.Icon} {item.Text}</NavLink>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </aside>
