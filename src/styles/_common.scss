@@ -9,7 +9,6 @@ main {
 }
 
 .btn-help {
-  right: 25px !important;
   border-radius: 1.5rem;
   color: $gray-700;
 }
@@ -19,6 +18,7 @@ main {
 }
 
 .btn-feedback {
+  right: -27px!important;
   color: #fff;
   background-color: #0A3D67;
   border-color: #0A3D67;
