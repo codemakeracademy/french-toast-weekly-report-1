@@ -1,7 +1,7 @@
 .modal1 {
   height: 100%;
   width: 100%;
-  background-color: rgba(255,255,255,0.4);
+  background-color: rgba(255,255,255,0.8);
   position: fixed;
   top: 0;
   left: 0;
@@ -31,4 +31,17 @@
   width: 75%;
   padding: 2rem;
   border-top: 3px solid $warning;
+}
+
+.btnclose {
+  background-color: black;
+  fill: white!important;
+  color: white!important;
+  stroke: white!important;
+}
+
+.name-btn {
+  path {
+    stroke: #8E999E;
+  }
 }

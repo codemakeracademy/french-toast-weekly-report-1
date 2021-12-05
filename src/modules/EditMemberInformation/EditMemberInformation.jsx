@@ -7,9 +7,10 @@ import {EditModal} from "./EditModal";
 export const EditMemberInformation = ({editableMember}) => {
     const membersName = editableMember.split(" ")[0]
     const [showEdit, setShowEdit] = useState(false)
-    const onClickEdit = () => {
+    const [currentTitle, setCurrentTitle] = useState("")
+    const onClickEdit = (e) => {
         setShowEdit(true)
-        console.log(showEdit)
+        setCurrentTitle(e.target.text)
     }
 
     return (
@@ -52,24 +53,24 @@ export const EditMemberInformation = ({editableMember}) => {
                         <div className="title border-bottom">{membersName.toUpperCase() + " REPORTS TO THE FOLLOWING LEADERS:"}</div>
                         <div className="team">
                             {teamMemberStore.map((item, index) => (
-                                <a key={index} href="#" className="btn btn-dark shadow-none">{item}</a>
+                                <a key={index} href="#" className="me-2 btn btn-dark shadow-none">{item}</a>
                             ))}
                         </div>
-                        <a onClick={()=>onClickEdit()} className="btn btn-outline-dark border-2 shadow-none" data-bs-toggle="modal" role="button">Edit Leader(s)</a>
+                        <a onClick={(e)=>onClickEdit(e)} className="btn btn-outline-dark border-2 shadow-none" data-bs-toggle="modal" role="button">Edit Leader(s)</a>
                     </div>
                     <div className="page-section reports-control">
                         <div className="title border-bottom">{"THE FOLLOWING TEAM MEMBERS REPORT TO "+ membersName.toUpperCase() +":"}</div>
                         <div className="team">
                             {teamMemberStore.map((item, index) => (
-                                <a key={index} href="#" className="btn btn-dark shadow-none">{item}</a>
+                                <a key={index} href="#" className="me-2 btn btn-dark shadow-none">{item}</a>
                             ))}
                         </div>
-                        <a className="btn btn-outline-dark border-2 shadow-none" data-bs-toggle="modal"
-                           href="#exampleModalToggle" role="button">Edit Member(s)</a>
+                        <a onClick={(e)=>onClickEdit(e)} className="btn btn-outline-dark border-2 shadow-none" data-bs-toggle="modal"
+                           role="button">Edit Member(s)</a>
                     </div>
                     <div className="page-section reports-control">
-                        <div className="title border-bottom">ANATOLIY'S INVITE LINK</div>
-                        <p>Share the following link to invite team members on Anatoliy's behalf.</p>
+                        <div className="title border-bottom">{membersName.toUpperCase()+"'S INVITE LINK"}</div>
+                        <p>{"Share the following link to invite team members on "+ membersName +"'s behalf."}</p>
                         <form className="text-center">
                                 <textarea className="text-area col-md-6"
                                           defaultValue="https://www.figma.com/file/xs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJB/Weekly-Report?node-id=5%3A20"
@@ -83,7 +84,7 @@ export const EditMemberInformation = ({editableMember}) => {
                     </div>
                 </div>
             </div>
-            {showEdit && <EditModal teamMemberStore={teamMemberStore} setShowEdit={setShowEdit}/>}
+            {showEdit && <EditModal title={currentTitle} teamMemberStore={teamMemberStore} setShowEdit={setShowEdit}/>}
         </>
     )
 }
