@@ -1,6 +1,6 @@
 import {teamMemberStore} from "../../store/teamMemberStore"
 import React from "react";
-import {Header} from "../common/Header";
+import {Header} from "../common/Header/Header.component";
 import {NavLink} from "react-router-dom";
 
 export const TeamMembers = ({onClickEdit}) => {

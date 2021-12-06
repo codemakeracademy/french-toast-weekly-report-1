@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {Header} from "../common/Header";
+import {Header} from "../common/Header/Header.component";
 import {teamMemberStore} from "../../store/teamMemberStore";
-import {EditModal} from "./EditModal";
+import {EditModal} from "./EditModal.component";
 
 
 export const EditMemberInformation = ({editableMember}) => {

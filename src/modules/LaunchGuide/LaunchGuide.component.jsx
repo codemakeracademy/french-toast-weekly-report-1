@@ -1,7 +1,7 @@
 import React from "react";
-import {Card} from "./Card";
+import {Card} from "./Card.component";
 import {launchStore} from "../../store/launchStore";
-import {Header} from "../common/Header";
+import {Header} from "../common/Header/Header.component";
 import logoPng from "../../img/logo.png";
 
 export const LaunchGuide = () => {

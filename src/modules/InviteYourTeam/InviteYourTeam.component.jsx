@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {Success} from "./Succsess";
-import {Header} from "../common/Header";
+import {Success} from "./Succsess.component";
+import {Header} from "../common/Header/Header.component";
 
 
 export const InviteYourTeam = () => {

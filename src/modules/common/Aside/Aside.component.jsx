@@ -1,7 +1,7 @@
 import React from "react";
-import logoPng from "../../img/logo.png"
+import logoPng from "../../../img/logo.png"
 import {NavLink} from "react-router-dom";
-import {navGroup1, navGroup2} from "../../store/navStore";
+import {navGroup1, navGroup2} from "../../../store/navStore";
 
 
 

@@ -1,5 +1,5 @@
 article {
-  background-color: $article-bg;
+  background-color: #f5f7f8;
   //padding: $article-padding;
   font-size: 0.9rem;
   font-weight: 500;
@@ -13,7 +13,7 @@ article .title {
 }
 
 article .page-title {
-  margin-right: 0px;
+  margin-right: 0;
   margin-bottom: 4.5rem;
   padding-bottom: 0;
   line-height: 1.5rem;
@@ -29,7 +29,7 @@ article .page-section {
   margin-bottom: 3.4rem;
 }
 .page-section a {
-  font-weight: $font-weight-bold;
+  font-weight: 700;
 }
 .page-section.reports-control .team .btn {
   margin-bottom: 1rem;

@@ -20,14 +20,8 @@ form {
     }
 
     input {
-      border-color: $input-border-color;
       border-top-style: solid;
       border-left-style: solid;
-
-      :focus,
-      :active {
-        border-color: $input-focus-border-color;
-      }
     }
   }
 
