@@ -4,9 +4,6 @@ import {launchStore} from "../../store/launchStore";
 import {Header} from "../common/Header";
 import logoPng from "../../img/logo.png";
 
-
-
-
 export const LaunchGuide = () => {
     return (
         <>

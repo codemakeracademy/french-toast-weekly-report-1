@@ -16,7 +16,7 @@ export const TeamMembers = ({onClickEdit}) => {
                 <div className="col-md-9">
                     <div className="p-5 pb-4 text-center">
                         <strong>TEAM MEMBERS</strong>
-                        <div className="mt-3 short-line mx-auto"></div>
+                        <div className="mt-3 short-line mx-auto"> </div>
                     </div>
                     <ul className="list-group">
                         {teamMemberStore.map((item, index) => (

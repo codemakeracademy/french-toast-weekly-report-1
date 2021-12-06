@@ -5,6 +5,7 @@ import {InviteYourTeam} from "../InviteYourTeam/InviteYourTeam";
 import {MyCompany} from "../MyCompany/MyCompany";
 import {TeamMembers} from "../TeamMembers/TeamMembers";
 import {EditMemberInformation} from "../EditMemberInformation/EditMemberInformation";
+import {TeamReports} from "../TeamReports/TeamReports";
 
 export const Article = () => {
 
@@ -21,6 +22,10 @@ export const Article = () => {
             <Route path="/invite-your-team">
                 <InviteYourTeam/>
             </Route>
+            <Route path="/team-reports">
+                <TeamReports/>
+            </Route>
+
             <Route path="/my-company">
                 <MyCompany/>
             </Route>

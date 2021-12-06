@@ -1,14 +1,18 @@
-.border-yellow {
-  border: 2px solid yellow;
-  border-radius: 1px;
+.btnActive {
+  border: solid 2px #FCD214!important;
+  box-shadow: none!important;
 }
 
-.btn-disabled {
-  background: #212529 !important;
-  color: #8E999E !important;
-  border-radius: 1px;
-  margin-left: -4px;
+.btnDisable {
+  color: gray;
+  box-shadow: none!important;
+
 }
+
+.name-team-report {
+  text-align: left!important;
+}
+
 .expand-all {
   margin-top: -34px;
 }
@@ -18,30 +22,17 @@
 
 header {
   .behind{
-    margin-right: -10px;
-  }
-  .z-index-1 {
-    z-index: 1;
-  }
-  .z-index-2 {
-    z-index: 2;
-  }
-  .z-index-3 {
-    z-index: 3;
-  }
-  .z-index-4 {
-    z-index: 4;
+    margin-right: -7px;
   }
   .round-yellow {
     background-color: #FCD214 !important
   }
 
   .round {
-    position: relative;
-    color: black;
+    outline: solid 2px white;
     background-color: #D5D9DB;
-    width: 45px;
-    height: 45px;
-    border: 2px solid white;
+    width: 40px;
+    height: 40px;
+    color: black;
   }
 }

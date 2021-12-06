@@ -17,11 +17,10 @@
   flex-wrap: wrap;
   margin-top:3rem;
   margin-bottom:0.7rem;
-}
-
-.tags > .input-group {
-  width: auto;
-  margin: 0 0.5rem 0.5rem 0;
+  .input-group {
+    width: auto;
+    margin: 0 0.5rem 0.5rem 0;
+  }
 }
 
 .modal-header {
@@ -31,13 +30,6 @@
   width: 75%;
   padding: 2rem;
   border-top: 3px solid $warning;
-}
-
-.btnclose {
-  background-color: black;
-  fill: white!important;
-  color: white!important;
-  stroke: white!important;
 }
 
 .name-btn {
