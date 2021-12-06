@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/weekly-team-report-react/static/css/main.bff1d959.chunk.css",
+    "main.js": "/weekly-team-report-react/static/js/main.907c70a8.chunk.js",
+    "main.js.map": "/weekly-team-report-react/static/js/main.907c70a8.chunk.js.map",
+    "runtime-main.js": "/weekly-team-report-react/static/js/runtime-main.cae48ac8.js",
+    "runtime-main.js.map": "/weekly-team-report-react/static/js/runtime-main.cae48ac8.js.map",
+    "static/js/2.cd2d9f1d.chunk.js": "/weekly-team-report-react/static/js/2.cd2d9f1d.chunk.js",
+    "static/js/2.cd2d9f1d.chunk.js.map": "/weekly-team-report-react/static/js/2.cd2d9f1d.chunk.js.map",
+    "index.html": "/weekly-team-report-react/index.html",
+    "static/css/main.bff1d959.chunk.css.map": "/weekly-team-report-react/static/css/main.bff1d959.chunk.css.map",
+    "static/js/2.cd2d9f1d.chunk.js.LICENSE.txt": "/weekly-team-report-react/static/js/2.cd2d9f1d.chunk.js.LICENSE.txt",
+    "static/media/1.db588afa.jpg": "/weekly-team-report-react/static/media/1.db588afa.jpg",
+    "static/media/2.85234f35.jpg": "/weekly-team-report-react/static/media/2.85234f35.jpg",
+    "static/media/3.d514a146.jpg": "/weekly-team-report-react/static/media/3.d514a146.jpg",
+    "static/media/4.ff8e4815.jpg": "/weekly-team-report-react/static/media/4.ff8e4815.jpg",
+    "static/media/index.scss": "/weekly-team-report-react/static/media/header.54b25eec.png",
+    "static/media/logo.ad25be08.png": "/weekly-team-report-react/static/media/logo.ad25be08.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cae48ac8.js",
+    "static/js/2.cd2d9f1d.chunk.js",
+    "static/css/main.bff1d959.chunk.css",
+    "static/js/main.907c70a8.chunk.js"
+  ]
+}
