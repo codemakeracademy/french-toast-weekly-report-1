@@ -8,6 +8,8 @@ import {EditMemberInformation} from "../../EditMemberInformation/EditMemberInfor
 import {TeamReports} from "../../TeamReports/TeamReports.component";
 import {FeedbackBtn} from "../buttons/FeedbackBtn..component";
 import {HelpBtn} from "../buttons/HelpBtn..component";
+import {FillOutReport} from "../../FillOutReport/FillOutReport.component";
+import {MyReports} from "../../MyReports/MyReports.component";
 
 export const Article = () => {
 
@@ -26,6 +28,12 @@ export const Article = () => {
                     </Route>
                     <Route path="/invite-your-team">
                         <InviteYourTeam/>
+                    </Route>
+                    <Route path="/my-reports">
+                        <MyReports/>
+                    </Route>
+                    <Route path="/fill-out-a-report">
+                        <FillOutReport/>
                     </Route>
                     <Route path="/team-reports">
                         <TeamReports/>
