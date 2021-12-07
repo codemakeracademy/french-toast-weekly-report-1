@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { FillOutReportHeader } from './FillOutReport.Header.component';
 import {FillOutCard} from './FillOutReport.Card.component';
-import { DatePicker } from 'antd';
-import 'antd/dist/antd.css';
-
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+import 'bootstrap-daterangepicker/daterangepicker.css';
 
 
 export const FillOutReport = () =>
 {
-    const { RangePicker } = DatePicker;
     const [sendError, setSendError] = useState(false)
     const SendError = () =>(
         <p className="text-danger fw-bold">All fields are required unless marked as optional.</p>
@@ -40,13 +38,14 @@ export const FillOutReport = () =>
                     placeholder="Is ther anything else you would like to share with your leader? *Optional"></textarea>
                 <div className="w-50 m-auto mb-5 mt-5">
                     <p className="text-start mb-1">Choose date</p>
-                    <RangePicker />
+                    <DateRangePicker>
+                        <input type="text" className="form-control m-auto" />
+                    </DateRangePicker>
                 </div>
                 { sendError ? <SendError /> : null }
                 <button className="btn btn-secondary fw-bold w-50 mb-5" onClick={sendReport}>Send Weekly Report</button>
             </div>
         </>
-
     )
 }
 export default FillOutReport;
