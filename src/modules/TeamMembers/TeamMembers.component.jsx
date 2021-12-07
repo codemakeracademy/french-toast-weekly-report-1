@@ -2,10 +2,13 @@ import {teamMemberStore} from "../../store/teamMemberStore"
 import React from "react";
 import {Header} from "../common/Header/Header.component";
 import {NavLink} from "react-router-dom";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 export const TeamMembers = ({onClickEdit}) => {
     return (
         <>
+            <HelmetComponent title="Team Members"/>
+
             <Header>
                 <div>
                     <h1 className="header-title">ANKO Technologies Corp</h1>

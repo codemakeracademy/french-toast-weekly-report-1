@@ -1,10 +1,13 @@
 import React from "react";
 import {Header} from "../common/Header/Header.component";
 import {NavLink} from "react-router-dom";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 export const MyCompany = () => {
     return (
         <>
+            <HelmetComponent title="My Company"/>
+
             <Header>
                 <div>
                     <h1 className="header-title">ANKO Technologies Corp</h1>
@@ -37,7 +40,7 @@ export const MyCompany = () => {
                     <div className="page-section">
                         <div className="title border-bottom">SEE A LIST OF ANKO TECHNOLOGIES CORP'S TEAM MEMBERS</div>
                         <p className="page-text">If you need to edit a particular team member, you can see a complete
-                            list of team members and visit theit profile to make edits. <strong>You will not be able
+                            list of team members and visit their profile to make edits. <strong>You will not be able
                                 to see a team member's weekly report.</strong></p>
                         <NavLink to="/team-members" className="btn btn-outline-dark border-2 shadow-none">See All Team Members</NavLink>
                     </div>

@@ -38,7 +38,6 @@ export const Article = () => {
                     <Route path="/team-reports">
                         <TeamReports/>
                     </Route>
-
                     <Route path="/my-company">
                         <MyCompany/>
                     </Route>
