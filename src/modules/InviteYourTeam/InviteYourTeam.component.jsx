@@ -16,6 +16,7 @@ export const InviteYourTeam = () => {
             <div className="row justify-content-md-center">
                 <div className="col-md-6">
                     {success && <Success/>}
+                    <div className="row mt-5">
                     <form>
                         <div className="card">
                             <div className="card-body">
@@ -44,6 +45,7 @@ export const InviteYourTeam = () => {
                             </div>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </>
