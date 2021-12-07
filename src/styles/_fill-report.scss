@@ -1,0 +1,46 @@
+.ant-picker-range{
+  width: 100% !important;
+}
+.mood-card {
+  background-color: white;
+  width: 150px;
+  height: 150px;
+  margin-right: 25px;
+}
+.header-welcomeback{
+  width: 30%;
+}
+.mood-card > img {
+  margin-top: 40px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 10px;
+}
+
+.report-content > div,
+input {
+  margin-left: calc(50% - 427px);
+}
+
+.report-content {
+  margin-top: 4rem;
+}
+.report-form-control {
+  height: 200px;
+  width: 857px;
+  border: none;
+}
+.gray-scaled {
+  filter: grayscale(100%) brightness(100%);
+  box-shadow: 0 0 5px 3px black;
+}
+
+.gray-scaled:hover {
+  filter: none;
+}
+.emotes{
+  width: 85%;
+}
+.custom-rb{
+  background-color: white;
+}
