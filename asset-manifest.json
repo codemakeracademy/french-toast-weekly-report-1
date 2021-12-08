@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/french-toast-weekly-report-1/static/css/main.0eb2cd9a.chunk.css",
-    "main.js": "/french-toast-weekly-report-1/static/js/main.6a9076b2.chunk.js",
-    "main.js.map": "/french-toast-weekly-report-1/static/js/main.6a9076b2.chunk.js.map",
+    "main.js": "/french-toast-weekly-report-1/static/js/main.d43b9688.chunk.js",
+    "main.js.map": "/french-toast-weekly-report-1/static/js/main.d43b9688.chunk.js.map",
     "runtime-main.js": "/french-toast-weekly-report-1/static/js/runtime-main.585b1346.js",
     "runtime-main.js.map": "/french-toast-weekly-report-1/static/js/runtime-main.585b1346.js.map",
     "static/css/2.fb9c3f02.chunk.css": "/french-toast-weekly-report-1/static/css/2.fb9c3f02.chunk.css",
@@ -25,6 +25,6 @@
     "static/css/2.fb9c3f02.chunk.css",
     "static/js/2.3bf93de1.chunk.js",
     "static/css/main.0eb2cd9a.chunk.css",
-    "static/js/main.6a9076b2.chunk.js"
+    "static/js/main.d43b9688.chunk.js"
   ]
 }
