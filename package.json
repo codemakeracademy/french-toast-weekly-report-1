@@ -2,6 +2,10 @@
   "name": "weekly-team-report-react",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
+=======
+  "homepage": "https://codemakeracademy.github.io/french-toast-weekly-report-1",
+>>>>>>> 18cc1ebb6dd3ae12593729cffc4085207855083c
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",

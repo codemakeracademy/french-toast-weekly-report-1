@@ -1,6 +1,7 @@
 import React from "react";
 import {Header} from "../common/Header/Header.component";
 import {MyReportsCard} from "./MyReports.Card.component";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 export const MyReports = () => {
     function expandAll(){
@@ -15,24 +16,26 @@ export const MyReports = () => {
         }
     }
     const defaultUserName = "default username";
+
     return(
-        <div>
+        <>
+            <HelmetComponent title="My Reports"/>
             <Header>
                 <div className="mx-auto header-avatar">
                     <div>{"!~AK"}</div>
                 </div>
                 <h1 className="header-title">{"!~"+defaultUserName}</h1>
-                <span className="header-subtitle">!~dafault e-mail</span>
+                <span className="header-subtitle">!~default e-mail</span>
             </Header>
             <div className="p-5 pb-4 text-center">
                 <strong>PAST WEEKLY REPORTS</strong>
-                <div className="mt-3 short-line mx-auto"></div>
+                <div className="mt-3 short-line mx-auto"> </div>
             </div>
             <div className="w-75 mb-2 m-auto d-grid gap-2 d-flex justify-content-end">
                 <button className="btn btn-dark text-light" id="allexpanded" onClick={expandAll}>Expand All</button>
             </div>
             <div className="row w-75 m-auto p-3 pe-4 bg-white mb-1">
-                <div className="col-7"></div>
+                <div className="col-7"> </div>
                 <div className="col-1 p-0 ms-2">Morale</div>
                 <div className="col-1 p-0 ms-2">Stress</div>
                 <div className="col-1 p-0">Workload</div>
@@ -42,7 +45,6 @@ export const MyReports = () => {
                 <MyReportsCard itemKey={2}/>
                 <MyReportsCard itemKey={3}/>
             </div>
-        </div>
+        </>
     )
 }
-export default MyReports;

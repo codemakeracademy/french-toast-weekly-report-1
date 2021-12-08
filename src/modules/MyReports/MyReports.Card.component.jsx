@@ -5,9 +5,6 @@ import img3 from "../../img/smiles/smile_excelent.png";
 import Accordion from 'react-bootstrap/Accordion'
 
 export const MyReportsCard = (itemKey) => {
-
-    console.log(itemKey);
-    
     const tempData = [
         {
             Title:"December 6 - December 12, 2021",
@@ -46,9 +43,9 @@ export const MyReportsCard = (itemKey) => {
                 <Accordion.Header>
                     <div className="row w-100">
                         <div className="col-7 mt-3 me-4">{tempData[0].Title}</div>
-                        <div className="col-1 ms-1"><img className="smile-icon" src={tempData[1].Image}/></div>
-                        <div className="col-1 ms-2"><img className="smile-icon" src={tempData[2].Image}/></div>
-                        <div className="col-1 ms-3"><img className="smile-icon" src={tempData[3].Image}/></div>
+                        <div className="col-1 ms-1"><img alt="smile" className="smile-icon" src={tempData[1].Image}/></div>
+                        <div className="col-1 ms-2"><img alt="smile"  className="smile-icon" src={tempData[2].Image}/></div>
+                        <div className="col-1 ms-3"><img alt="smile"  className="smile-icon" src={tempData[3].Image}/></div>
                     </div>
                 </Accordion.Header>
                 <Accordion.Body>
@@ -84,4 +81,3 @@ export const MyReportsCard = (itemKey) => {
         </Accordion>
     )
 }
-export default MyReportsCard;

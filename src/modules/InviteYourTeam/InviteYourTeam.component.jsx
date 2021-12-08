@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Success } from "./Succsess.component";
 import { Header } from "../common/Header/Header.component";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 export const InviteYourTeam = () => {
     const [success, setSuccess] = useState(false);
@@ -9,6 +10,7 @@ export const InviteYourTeam = () => {
     };
     return (
         <>
+            <HelmetComponent title="Invite Your Team"/>
             <Header>
                 <h1>Invite Your Team</h1>
             </Header>
