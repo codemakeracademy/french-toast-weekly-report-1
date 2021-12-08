@@ -6,6 +6,7 @@ import { smiles } from "../../store/weekAgoStore";
 import { teamMemberStore } from "../../store/teamMemberStore";
 import { WeeklyReportHistoryCard } from "./WeeklyReportHistoryCard.component";
 import { NavLink } from "react-router-dom";
+import { HelmetComponent } from "../common/Helmet/Helmet.component";
 
 export const WeeklyReportHistory = () => {
     const [activeTeam, setActiveTeam] = useState(1);
@@ -14,6 +15,7 @@ export const WeeklyReportHistory = () => {
 
     return (
         <>
+            <HelmetComponent title="Weekly Report History" />
             <Header>
                 <div className="pt-2">
                     {["Immediate Team", "Extended Team"].map((item, index) => (
@@ -46,7 +48,7 @@ export const WeeklyReportHistory = () => {
                                 </button>
                             ))}
                         </div>
-                        
+
                         <div className="pt-5">
                             <strong>EXTENDED TEAM AVERAGE</strong>
                             <div className="mt-3 short-line mx-auto"> </div>

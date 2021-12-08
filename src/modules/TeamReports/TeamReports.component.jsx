@@ -1,11 +1,8 @@
 import {teamMemberStore} from "../../store/teamMemberStore"
 import React, {useState} from "react";
 import {Header} from "../common/Header/Header.component";
-<<<<<<< HEAD
 import { NavLink } from "react-router-dom";
-=======
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
->>>>>>> 18cc1ebb6dd3ae12593729cffc4085207855083c
 
 export const TeamReports = () => {
     const [activeTeam, setActiveTeam] = useState(0)

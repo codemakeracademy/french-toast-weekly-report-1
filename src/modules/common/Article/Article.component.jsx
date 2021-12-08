@@ -39,12 +39,9 @@ export const Article = () => {
                     <Route path="/team-reports">
                         <TeamReports/>
                     </Route>
-<<<<<<< HEAD
                     <Route path="/weekly-report-history">
                         <WeeklyReportHistory/>
                     </Route>
-=======
->>>>>>> 18cc1ebb6dd3ae12593729cffc4085207855083c
                     <Route path="/my-company">
                         <MyCompany/>
                     </Route>
