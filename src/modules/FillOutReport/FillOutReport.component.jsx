@@ -5,6 +5,7 @@ import DateRangePicker from 'react-bootstrap-daterangepicker';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
 
+
 export const FillOutReport = () =>
 {
     const [sendError, setSendError] = useState(false)

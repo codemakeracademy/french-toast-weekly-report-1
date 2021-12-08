@@ -1,8 +1,8 @@
 import React from "react";
-import image1 from "../img/1.jpg";
-import image2 from "../img/2.jpg";
-import image3 from "../img/3.jpg";
-import image4 from "../img/4.jpg";
+import image1 from "../img/1.png";
+import image2 from "../img/2.png";
+import image3 from "../img/3.png";
+import image4 from "../img/4.png";
 
 export const launchStore = [
     {
