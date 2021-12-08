@@ -11,7 +11,7 @@ export const FillOutCard = (props) => {
     const [showTextArea, setShowTextArea] = useState(false)
     const ShowTextArea = () => (
         <textarea className="w-75 m-auto mt-3 form-control" rows="5"
-            placeholder={"Would you like to add any comments about why you rated your " + props.name + " this way? *Optional"}></textarea>
+            placeholder={"Would you like to add any comments about why you rated your " + props.name + " this way? *Optional"}> </textarea>
     )
     return(
         <div>
@@ -20,7 +20,7 @@ export const FillOutCard = (props) => {
                 <div className={"row"}>
                     {smilesStore.map((item, index) => (
                         <div key={index} className="custom-rb col m-2">
-                            <img className="emotes" src={index === active ? item.imageOnClick : item.imageDefault}
+                            <img alt="smile" className="emotes" src={index === active ? item.imageOnClick : item.imageDefault}
                                 onClick={() => {
                                     changeImage(index);
                                     setShowTextArea(true)
@@ -34,4 +34,3 @@ export const FillOutCard = (props) => {
         </div>
     )
 }
-export default FillOutCard;

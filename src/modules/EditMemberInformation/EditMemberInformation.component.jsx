@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Header} from "../common/Header/Header.component";
 import {teamMemberStore} from "../../store/teamMemberStore";
 import {EditModal} from "./EditModal.component";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 
 export const EditMemberInformation = ({editableMember}) => {
@@ -15,6 +16,7 @@ export const EditMemberInformation = ({editableMember}) => {
 
     return (
         <>
+            <HelmetComponent title="Edit Member Information"/>
             <Header>
                 <div className="mx-auto header-avatar">
                     <div>{editableMember.split(" ").map((n)=>n[0]).join("")}</div>
