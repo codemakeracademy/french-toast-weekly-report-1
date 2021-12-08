@@ -3,10 +3,15 @@ import {Card} from "./Card.component";
 import {launchStore} from "../../store/launchStore";
 import {Header} from "../common/Header/Header.component";
 import logoPng from "../../img/logo.png";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
+
+
+
 
 export const LaunchGuide = () => {
     return (
         <>
+            <HelmetComponent title="Launch Guide"/>
             <Header>
                 <img className="mx-auto" alt="logo" src={logoPng}/>
                 <h1>Launch Guide</h1>
@@ -19,3 +24,4 @@ export const LaunchGuide = () => {
         </>
     )
 }
+
