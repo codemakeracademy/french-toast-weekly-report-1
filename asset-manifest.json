@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/french-toast-weekly-report-1/static/css/main.9df20ce4.chunk.css",
-    "main.js": "/french-toast-weekly-report-1/static/js/main.04e2dcba.chunk.js",
-    "main.js.map": "/french-toast-weekly-report-1/static/js/main.04e2dcba.chunk.js.map",
+    "main.css": "/french-toast-weekly-report-1/static/css/main.0eb2cd9a.chunk.css",
+    "main.js": "/french-toast-weekly-report-1/static/js/main.d43b9688.chunk.js",
+    "main.js.map": "/french-toast-weekly-report-1/static/js/main.d43b9688.chunk.js.map",
     "runtime-main.js": "/french-toast-weekly-report-1/static/js/runtime-main.585b1346.js",
     "runtime-main.js.map": "/french-toast-weekly-report-1/static/js/runtime-main.585b1346.js.map",
     "static/css/2.fb9c3f02.chunk.css": "/french-toast-weekly-report-1/static/css/2.fb9c3f02.chunk.css",
-    "static/js/2.72d06903.chunk.js": "/french-toast-weekly-report-1/static/js/2.72d06903.chunk.js",
-    "static/js/2.72d06903.chunk.js.map": "/french-toast-weekly-report-1/static/js/2.72d06903.chunk.js.map",
+    "static/js/2.3bf93de1.chunk.js": "/french-toast-weekly-report-1/static/js/2.3bf93de1.chunk.js",
+    "static/js/2.3bf93de1.chunk.js.map": "/french-toast-weekly-report-1/static/js/2.3bf93de1.chunk.js.map",
     "index.html": "/french-toast-weekly-report-1/index.html",
     "static/css/2.fb9c3f02.chunk.css.map": "/french-toast-weekly-report-1/static/css/2.fb9c3f02.chunk.css.map",
-    "static/css/main.9df20ce4.chunk.css.map": "/french-toast-weekly-report-1/static/css/main.9df20ce4.chunk.css.map",
-    "static/js/2.72d06903.chunk.js.LICENSE.txt": "/french-toast-weekly-report-1/static/js/2.72d06903.chunk.js.LICENSE.txt",
+    "static/css/main.0eb2cd9a.chunk.css.map": "/french-toast-weekly-report-1/static/css/main.0eb2cd9a.chunk.css.map",
+    "static/js/2.3bf93de1.chunk.js.LICENSE.txt": "/french-toast-weekly-report-1/static/js/2.3bf93de1.chunk.js.LICENSE.txt",
     "static/media/1.1c60657d.png": "/french-toast-weekly-report-1/static/media/1.1c60657d.png",
     "static/media/2.a696eda2.png": "/french-toast-weekly-report-1/static/media/2.a696eda2.png",
     "static/media/3.6eaaba8e.png": "/french-toast-weekly-report-1/static/media/3.6eaaba8e.png",
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.585b1346.js",
     "static/css/2.fb9c3f02.chunk.css",
-    "static/js/2.72d06903.chunk.js",
-    "static/css/main.9df20ce4.chunk.css",
-    "static/js/main.04e2dcba.chunk.js"
+    "static/js/2.3bf93de1.chunk.js",
+    "static/css/main.0eb2cd9a.chunk.css",
+    "static/js/main.d43b9688.chunk.js"
   ]
 }
