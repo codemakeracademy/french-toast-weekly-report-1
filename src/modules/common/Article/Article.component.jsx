@@ -10,6 +10,7 @@ import {FeedbackBtn} from "../buttons/FeedbackBtn..component";
 import {HelpBtn} from "../buttons/HelpBtn..component";
 import {FillOutReport} from "../../FillOutReport/FillOutReport.component";
 import {MyReports} from "../../MyReports/MyReports.component";
+import {WeeklyReportHistory} from "../../WeeklyReportHistory/WeeklyReportHistory.component";
 
 export const Article = () => {
 
@@ -38,7 +39,9 @@ export const Article = () => {
                     <Route path="/team-reports">
                         <TeamReports/>
                     </Route>
-
+                    <Route path="/weekly-report-history">
+                        <WeeklyReportHistory/>
+                    </Route>
                     <Route path="/my-company">
                         <MyCompany/>
                     </Route>

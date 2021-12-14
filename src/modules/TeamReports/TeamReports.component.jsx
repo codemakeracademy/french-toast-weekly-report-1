@@ -1,6 +1,8 @@
 import {teamMemberStore} from "../../store/teamMemberStore"
 import React, {useState} from "react";
 import {Header} from "../common/Header/Header.component";
+import { NavLink } from "react-router-dom";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 export const TeamReports = () => {
     const [activeTeam, setActiveTeam] = useState(0)
@@ -10,13 +12,14 @@ export const TeamReports = () => {
     }
     return (
         <>
+            <HelmetComponent title="Team Reports"/>
             <Header>
                 <div className="pt-2">
                     {
                         ["Immediate Team", "Extended Team"].map((item, index) => (
-                            <button key={index}
+                            <NavLink to={(item === "Extended Team") ? "weekly-report-history" : "#"} key={index}
                                     className={activeTeam === index ? "py-0 btn btn-dark btnActive" : "py-0 btn btn-dark btnDisable"}
-                                    onClick={() => setActiveTeam(index)}>{item}</button>
+                                    onClick={() => setActiveTeam(index)}>{item}</NavLink>
                         ))
                     }
                 </div>
