@@ -2,6 +2,7 @@ import React from "react";
 import logoPng from "../../../img/logo.png";
 import { NavLink } from "react-router-dom";
 import { navGroup1, navGroup2 } from "../../../store/navStore";
+import AuthNav from "../../../auth/auth-nav";
 
 export const Aside = () => {
     return (
@@ -19,6 +20,7 @@ export const Aside = () => {
                             </li>
                         );
                     })}
+                    <AuthNav/>
                 </ul>
             </div>
             <div>
