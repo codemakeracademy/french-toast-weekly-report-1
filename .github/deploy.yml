@@ -1,0 +1,13 @@
+name: Deploy to digitalocean
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master   
+      - name: Rebuild images
+        run: |
+          docker-compose up -d --build
