@@ -1,6 +1,7 @@
 import {teamMemberStore} from "../../store/teamMemberStore"
 import React, {useState} from "react";
 import {Header} from "../common/Header/Header.component";
+import { NavLink } from "react-router-dom";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 export const TeamReports = () => {
@@ -16,9 +17,9 @@ export const TeamReports = () => {
                 <div className="pt-2">
                     {
                         ["Immediate Team", "Extended Team"].map((item, index) => (
-                            <button key={index}
+                            <NavLink to={(item === "Extended Team") ? "weekly-report-history" : "#"} key={index}
                                     className={activeTeam === index ? "py-0 btn btn-dark btnActive" : "py-0 btn btn-dark btnDisable"}
-                                    onClick={() => setActiveTeam(index)}>{item}</button>
+                                    onClick={() => setActiveTeam(index)}>{item}</NavLink>
                         ))
                     }
                 </div>
@@ -38,9 +39,9 @@ export const TeamReports = () => {
             <div className=" team-members row justify-content-md-center">
                 <div className="col-md-9">
                     <div className="pb-4 text-center">
-                        <div className="pt-2">
+                        <div className="pt-5">
                             {
-                                ["Previous period: 5/16 - 5/22", "Current Period: 5/23 - 5/29 Older Reports"].map((item, index) => (
+                                ["Previous period: 5/16 - 5/22", "Current Period: 5/23 - 5/29", "Older Reports"].map((item, index) => (
                                     <button key={index}
                                             className={activePeriod === index ? "py-0 btn btn-dark btnActive" : "py-0 btn btn-dark btnDisable"}
                                             onClick={() => setActivePeriod(index)}>{item}</button>
@@ -52,7 +53,7 @@ export const TeamReports = () => {
                             <div className="mt-3 short-line mx-auto"> </div>
                         </div>
                     </div>
-                    <ul className="list-group">
+                    <ul className="list-group mb-5">
                         <li className="pe-sm-0 shadow-sm rounded list-group-item mb-2 border-1">
                             <div className="d-flex justify-content-end">
                                 <div className="m-2">Morale</div>
@@ -65,7 +66,7 @@ export const TeamReports = () => {
 
                         {teamMemberStore.map((item, index) => (
                                 <li key={index}
-                                    className="shadow-sm rounded list-group-item mb-2 d-flex border-1 align-items-center text-center">
+                                    className="p-3 shadow-sm rounded list-group-item mb-2 d-flex border-1 align-items-center text-center">
                                     <div className="d-flex align-items-center">
                                         <div
                                             className="round p-2 rounded-circle">{item.split(" ").map((n) => n[0]).join("")}</div>

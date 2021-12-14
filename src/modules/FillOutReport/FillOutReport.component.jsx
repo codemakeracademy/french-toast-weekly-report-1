@@ -6,6 +6,7 @@ import 'bootstrap-daterangepicker/daterangepicker.css';
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 
+
 export const FillOutReport = () =>
 {
     const [sendError, setSendError] = useState(false)

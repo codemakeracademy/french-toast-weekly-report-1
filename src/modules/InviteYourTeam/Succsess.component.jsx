@@ -2,7 +2,7 @@ import React from "react";
 
 export const Success = () => {
     return (
-        <div className="card mb-5">
+        <div className="card mt-5">
             <div className="card-body">
                 <h6 className="card-title">Success! Your team member has been invited to the Weekly Report
                     Tool.</h6>

@@ -24,7 +24,7 @@ export const EditMemberInformation = ({editableMember}) => {
                 <h1 className="header-title">{editableMember}</h1>
                 <span className="header-subtitle">anatoliy@ankosoftware.com</span>
             </Header>
-            <div className=" justify-content-md-center p-5">
+            <div className="container justify-content-md-center p-5">
                 <div className="col-md-12 p-0">
                     <div className="page-title">
                         <h1>{"Edit " + membersName + "'s Information"}</h1>
@@ -74,7 +74,7 @@ export const EditMemberInformation = ({editableMember}) => {
                         <div className="title border-bottom">{membersName.toUpperCase()+"'S INVITE LINK"}</div>
                         <p>{"Share the following link to invite team members on "+ membersName +"'s behalf."}</p>
                         <form className="text-center">
-                                <textarea className="text-area col-md-6"
+                                <textarea disabled className="text-area col-md-6"
                                           defaultValue="https://www.figma.com/file/xs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJB/Weekly-Report?node-id=5%3A20"
                                           />
                             <div className="p-2">

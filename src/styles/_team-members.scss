@@ -7,9 +7,16 @@
     width: 35px;
   }
   .round {
+    outline: solid 3px white;
     background-color: #D5D9DB;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    color: #323a3d;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   ul {
     li {
