@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Switch, Route, Redirect} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import {LaunchGuide} from "../../LaunchGuide/LaunchGuide.component";
 import {InviteYourTeam} from "../../InviteYourTeam/InviteYourTeam.component";
 import {MyCompany} from "../../MyCompany/MyCompany.component";
@@ -52,7 +52,6 @@ export const Article = () => {
                     <Route path="/edit-member-information">
                         <EditMemberInformation editableMember={editableMember}/>
                     </Route>
-                    <Redirect to="/"/>
                 </Switch>
             </article>
         </main>
