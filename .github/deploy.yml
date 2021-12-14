@@ -5,9 +5,10 @@ on:
 
 jobs:
   build:
+    name: Deploy
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@master   
       - name: Rebuild images
+        uses: actions/checkout@master 
         run: |
           docker-compose up -d --build
