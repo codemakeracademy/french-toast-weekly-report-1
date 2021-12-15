@@ -14,4 +14,4 @@ services:
 networks:
   front:
     external:
-      name: cmweeklyteamreport_front
+      name: french-toast-weekly-report-1-api_front

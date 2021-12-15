@@ -4,16 +4,10 @@ on:
     branches: [master]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: [self-hosted]
     steps:
-      - name: Deploy Frontend
-        uses: appleboy/ssh-action@v0.1.2
-        with:
-          host: ${{secrets.SSH_HOST}}
-          key: ${{secrets.SSH_KEY}}
-          username: ${{secrets.SSH_USERNAME}}
-          script: |
-            cd french-toast-weekly-report-1
-            git pull
-            docker-compose up -d --build
+      - uses: actions/checkout@v2
+      - name: Rebuild images
+        run: |
+          docker-compose up -d --build
