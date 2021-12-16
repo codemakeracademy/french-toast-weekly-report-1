@@ -11,6 +11,7 @@ import {HelpBtn} from "../buttons/HelpBtn..component";
 import {FillOutReport} from "../../FillOutReport/FillOutReport.component";
 import {MyReports} from "../../MyReports/MyReports.component";
 import {WeeklyReportHistory} from "../../WeeklyReportHistory/WeeklyReportHistory.component";
+import {MyProfile} from "../../MyProfile/MyProfile.component";
 
 export const Article = () => {
 
@@ -51,6 +52,9 @@ export const Article = () => {
                     </Route>
                     <Route path="/edit-member-information">
                         <EditMemberInformation editableMember={editableMember}/>
+                    </Route>
+                    <Route path="/my-profile">
+                        <MyProfile/>
                     </Route>
                 </Switch>
             </article>
