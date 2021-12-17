@@ -1,11 +1,15 @@
 import React from "react";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {Header} from "../common/Header/Header.component";
-import {Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 
 export const NewCompany = ({addNewCompany}) => {
-    const toRegister = (companyNameObj) => {
-        addNewCompany(companyNameObj)
+
+    const onSubmit = (values, {setSubmitting}) => {
+        setTimeout(() => {
+            addNewCompany(values)
+            setSubmitting(false);
+        }, 400);
     }
     return (
         <>
@@ -26,41 +30,25 @@ export const NewCompany = ({addNewCompany}) => {
 
                         <Formik
                             initialValues={{companyName: ''}}
-                            onSubmit={(values, {setSubmitting}) => {
-                                setTimeout(() => {
-                                    toRegister(values)
-                                    setSubmitting(false);
-                                }, 400);
-                            }}
+                            onSubmit={onSubmit}
                         >
-                            {({
-                                  values,
-                                  handleChange,
-                                  handleBlur,
-                                  handleSubmit,
-                                  isSubmitting,
-                              }) => (
-                                <form onSubmit={handleSubmit} className="col-md-4">
+                            {({ isSubmitting }) => (
+                                <Form className="col-md-4">
                                     <div className="form-group">
                                         <label htmlFor="companyName" className="form-label">
                                             Enter your Company Name
                                         </label>
-                                        <input
-                                            className="form-control border-2 shadow-none"
-                                            type="text"
-                                            name="companyName"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.email}
-                                        />
+                                        <Field className="form-control border-2 shadow-none" type="text" name="companyName" />
                                     </div>
+                                    <ErrorMessage name="companyName" component="div" />
                                     <div className="form-group">
-                                        <button disabled={isSubmitting} type="submit"
-                                                className="btn btn-outline-dark border-2 shadow-none">
-                                            Register
+                                        <button
+                                            disabled={isSubmitting} type="submit"
+                                            className="btn btn-outline-dark border-2 shadow-none"
+                                        >Register
                                         </button>
                                     </div>
-                                </form>
+                                </Form>
                             )}
                         </Formik>
                     </div>
