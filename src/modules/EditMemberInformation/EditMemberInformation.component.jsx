@@ -3,6 +3,7 @@ import {Header} from "../common/Header/Header.component";
 import {teamMemberStore} from "../../store/teamMemberStore";
 import {EditModal} from "./EditModal.component";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 
 
 export const EditMemberInformation = ({editableMember}) => {
@@ -12,6 +13,12 @@ export const EditMemberInformation = ({editableMember}) => {
     const onClickEdit = (e) => {
         setShowEdit(true)
         setCurrentTitle(e.target.text)
+    }
+    const onSubmit = (values, { setSubmitting }) => {
+        setTimeout(() => {
+            console.log(values)
+            setSubmitting(false);
+        }, 400);
     }
 
     return (
@@ -33,23 +40,38 @@ export const EditMemberInformation = ({editableMember}) => {
                     </div>
                     <div className="page-section">
                         <div className="title border-bottom">BASIC PROFILE INFORMATION</div>
-                        <form className="col-md-4">
-                            <div className="form-group">
-                                <label htmlFor="firstName" className="form-label">First Name</label>
-                                <input name="firstName" type="text" className="form-control border-2 shadow-none"/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="lastName" className="form-label">Last Name</label>
-                                <input name="lastName" type="text" className="form-control border-2 shadow-none"/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="title" className="form-label">Title</label>
-                                <input name="title" type="text" className="form-control border-2 shadow-none"/>
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-warning border-2 shadow-none">Save</button>
-                            </div>
-                        </form>
+
+                        <Formik
+                            initialValues={{ firstName: '', lastName: '', title: '' }}
+                            onSubmit={onSubmit}
+                        >
+                            {({ isSubmitting }) => (
+                                <Form className="col-md-4">
+
+                                    <div className="form-group">
+                                        <label htmlFor="firstName" className="form-label">First Name</label>
+                                        <Field type="text" name="firstName" className="form-control border-2 shadow-none"/>
+                                        <ErrorMessage name="firstName" component="div" />
+
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="lastName" className="form-label">Last Name</label>
+                                        <Field type="text" name="lastName" className="form-control border-2 shadow-none"/>
+                                        <ErrorMessage name="lastName" component="div" />
+
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="title" className="form-label">Title</label>
+                                        <Field type="text" name="title" className="form-control border-2 shadow-none"/>
+                                        <ErrorMessage name="title" component="div" />
+
+                                    </div>
+                                    <div className="form-group">
+                                        <button disabled={isSubmitting} type="submit" className="btn btn-warning border-2 shadow-none">Save</button>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </div>
                     <div className="page-section reports-control">
                         <div className="title border-bottom">{membersName.toUpperCase() + " REPORTS TO THE FOLLOWING LEADERS:"}</div>
