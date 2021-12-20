@@ -33,7 +33,7 @@ export const navGroup2 = [
     },
     {
         Text: "My Profile",
-        Link: "/my-profile",
+        Link: "/edit-member-information",
         Icon: <BsGear/>,
     },
 ];
