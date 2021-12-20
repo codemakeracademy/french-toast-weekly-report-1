@@ -4,10 +4,15 @@ import {teamMemberStore} from "../../store/teamMemberStore";
 import {EditModal} from "./EditModal.component";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {ErrorMessage, Field, Form, Formik} from "formik";
+import {useAuth0} from "@auth0/auth0-react";
 
 
 export const EditMemberInformation = ({editableMember}) => {
-    const membersName = editableMember.split(" ")[0]
+    const {user} = useAuth0();
+
+    const memberInitials = editableMember ? editableMember.split(" ").map((n)=>n[0]).join("") : user.nickname.split(" ").map((n)=>n[0]).join("")
+    const membersFullName = editableMember ? editableMember : user.nickname
+    const membersName = editableMember ? editableMember.split(" ")[0] : user.nickname
     const [showEdit, setShowEdit] = useState(false)
     const [currentTitle, setCurrentTitle] = useState("")
     const onClickEdit = (e) => {
@@ -26,9 +31,9 @@ export const EditMemberInformation = ({editableMember}) => {
             <HelmetComponent title="Edit Member Information"/>
             <Header>
                 <div className="mx-auto header-avatar">
-                    <div>{editableMember.split(" ").map((n)=>n[0]).join("")}</div>
+                    <div>{memberInitials}</div>
                 </div>
-                <h1 className="header-title">{editableMember}</h1>
+                <h1 className="header-title">{membersFullName}</h1>
                 <span className="header-subtitle">anatoliy@ankosoftware.com</span>
             </Header>
             <div className="container justify-content-md-center p-5">
