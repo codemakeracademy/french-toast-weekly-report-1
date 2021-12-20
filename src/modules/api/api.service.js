@@ -3,7 +3,9 @@ import axios from 'axios';
 
 export const api = axios.create({
     timeout: 30000,
-    headers: { Accept: "application/json"}
+    headers: { Accept: "application/json"},
+    //baseURL: 'https://localhost:5001/api/'
+    baseURL: 'https://weekly-report-01.digitalocean.ankocorp.com/api/'
 })
 
 

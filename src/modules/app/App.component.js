@@ -1,51 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { Article } from "../common/Article/Article.component";
-import { Aside } from "../common/Aside/Aside.component";
-import { useAuth0 } from '@auth0/auth0-react';
+import React, {useEffect, useState} from "react";
+import {Article} from "../common/Article/Article.component";
+import {useAuth0} from '@auth0/auth0-react';
 import WelcomePage from "../WelcomePage/WelcomePage";
-import NewCompany from "../MyCompany/NewCompany.component";
+import {InvitePage} from "../InvitePage/InvitePage.component";
+import {NewCompany} from "../MyCompany/NewCompany.component";
 import * as appService from "./App.service";
 
-export function App() {
-    const { isAuthenticated, user } = useAuth0();
-    const [hasCompany, setHasCompany] = useState(false);
-    console.log(user)
 
-    useEffect(() => {
+export function App() {
+    const {isAuthenticated, user} = useAuth0();
+    const currentLocation = window.location;
+    const [hasCompany, setHasCompany] = useState(false)
+    const [createNew, setCreateNew] = useState()
+    //const [userFromBD, setUserFromBD] = useState()
+
+
+    useEffect( () => {
         try {
             appService.getUserBySub(user.sub)
                 .then(res => {
                     res ? console.log("true") : console.log(false);
                     res ? setHasCompany(true) : setHasCompany(false);
                 });
-            // eslint-disable-next-line no-empty
-        } catch { }
-    }, [user])
-
-    {
-        if (isAuthenticated && hasCompany) {
-            return (
-                <>
-                    <div className="wrapper d-flex w-100 h-100">
-                        <Aside />
-                        <Article user={user} />
-                    </div>
-                </>
-            )
-        } else if (isAuthenticated && !hasCompany) {
-            return (
-                <>
-                    <NewCompany />
-                </>
-            )
-        } else if (!isAuthenticated && !hasCompany) {
-            return (
-                <>
-                    <WelcomePage />
-                </>
-            )
+        } catch {
+            console.error("error")
         }
-    }
+
+    }, [user, createNew])
+  
+    return (
+        <>
+            {currentLocation.pathname === "/invite"
+                ? (isAuthenticated
+                    ? <Article/>
+                    : <InvitePage/>)
+                : (isAuthenticated && hasCompany)
+                    ? <Article/>
+                    : (isAuthenticated && !hasCompany)
+                        ? <NewCompany onButton={setCreateNew}/>
+                        : <WelcomePage/>
+            }
+        </>
+    );
 }
 
 
