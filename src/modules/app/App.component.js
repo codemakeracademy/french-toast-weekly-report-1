@@ -4,7 +4,7 @@ import {useAuth0} from '@auth0/auth0-react';
 import WelcomePage from "../WelcomePage/WelcomePage";
 import {InvitePage} from "../InvitePage/InvitePage.component";
 import {NewCompany} from "../MyCompany/NewCompany.component";
-import {getUserBySub} from "./App.service";
+import * as appService from "./App.service";
 
 
 export function App() {
@@ -17,12 +17,17 @@ export function App() {
 
     useEffect( () => {
         try {
-            getUserBySub(user.sub).then(res => {setHasCompany(!!res)})
+            appService.getUserBySub(user.sub)
+                .then(res => {
+                    res ? console.log("true") : console.log(false);
+                    res ? setHasCompany(true) : setHasCompany(false);
+                });
         } catch {
             console.error("error")
         }
 
     }, [user, createNew])
+  
     return (
         <>
             {currentLocation.pathname === "/invite"
@@ -38,3 +43,6 @@ export function App() {
         </>
     );
 }
+
+
+export default App;

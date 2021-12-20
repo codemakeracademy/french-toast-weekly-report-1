@@ -42,9 +42,14 @@ export const NewCompany = ({onButton}) => {
             setSubmitting(false);
         }, 400);
     }
+    
     return (
+        isCompanyAdded
+        ?
+        <App/>
+        :
         <>
-            <HelmetComponent title="New Company"/>
+            <HelmetComponent title="New Company" />
             <Header>
                 <div>
                     <h1 className="header-title">New Company</h1>
@@ -52,12 +57,11 @@ export const NewCompany = ({onButton}) => {
             </Header>
             <div className="new-company container p-5 align-content-center">
                 <div className="col-md-12 p-0">
-                    <div className="page-title">
+                    <div className="page-title border-bottom">
                         <h2>Registration form</h2>
                         <p>Register your company to be able to track your team's reports</p>
                     </div>
                     <div className="page-section">
-                        <div className="title border-bottom">Registration new company</div>
 
                         <Formik
                             initialValues={{
@@ -101,10 +105,11 @@ export const NewCompany = ({onButton}) => {
                                         placeholder=""
                                     />
                                     <div className="form-group">
-                                        <button
-                                            disabled={isSubmitting} type="submit"
-                                            className="btn btn-outline-dark border-2 shadow-none"
-                                        >Register
+                                        <button disabled={isSubmitting} type="submit" className="btn btn-outline-dark border-2 shadow-none">
+                                            Register Your Company
+                                        </button>
+                                        <button onClick={() => logout({ returnTo: window.location.origin })} className="ms-3 btn btn-outline-dark border-2 shadow-none">
+                                            Sign Out
                                         </button>
                                         <button
                                             onClick={() => logout({returnTo: window.location.origin,})}
@@ -122,5 +127,7 @@ export const NewCompany = ({onButton}) => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
+
+export default NewCompany;

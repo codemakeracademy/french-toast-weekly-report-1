@@ -9,5 +9,3 @@ export const getCompanyById = (id) => {
     return api.get(`companies${id}`, {validateStatus: false})
         .then((response) => response.data);
 };
-
-
