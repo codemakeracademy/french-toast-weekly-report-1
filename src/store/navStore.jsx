@@ -1,5 +1,5 @@
 import React from "react";
-import { BsGear } from "react-icons/bs";
+import {BsGear} from "react-icons/bs";
 
 export const navGroup1 = [
     {
@@ -28,16 +28,12 @@ export const navGroup1 = [
 
 export const navGroup2 = [
     {
-        Text: "Back to Elite",
-        Link: "/back-to-elite",
-    },
-    {
         Text: "My Company",
         Link: "/my-company",
     },
     {
         Text: "My Profile",
         Link: "/my-profile",
-        Icon: <BsGear />,
+        Icon: <BsGear/>,
     },
 ];
