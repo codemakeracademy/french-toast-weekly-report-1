@@ -44,10 +44,6 @@ export const NewCompany = ({onButton}) => {
     }
     
     return (
-        isCompanyAdded
-        ?
-        <App/>
-        :
         <>
             <HelmetComponent title="New Company" />
             <Header>
@@ -111,14 +107,6 @@ export const NewCompany = ({onButton}) => {
                                         <button onClick={() => logout({ returnTo: window.location.origin })} className="ms-3 btn btn-outline-dark border-2 shadow-none">
                                             Sign Out
                                         </button>
-                                        <button
-                                            onClick={() => logout({returnTo: window.location.origin,})}
-                                            type="button"
-                                            className="ms-5 btn btn-outline-dark border-2 shadow-none"
-                                        >Log Out
-                                        </button>
-
-
                                     </div>
                                 </Form>
                             )}
