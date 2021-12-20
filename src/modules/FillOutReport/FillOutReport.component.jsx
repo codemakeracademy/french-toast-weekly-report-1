@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {FillOutReportHeader} from './FillOutReport.Header.component';
 import {FillOutCard} from './FillOutReport.Card.component';
-import DateRangePicker from 'react-bootstrap-daterangepicker';
-import 'bootstrap-daterangepicker/daterangepicker.css';
+import { DateRangePicker } from 'rsuite';
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
 
@@ -41,9 +40,7 @@ export const FillOutReport = () => {
                           placeholder="Is there anything else you would like to share with your leader? *Optional"></textarea>
                 <div className="w-50 m-auto mb-5 mt-5">
                     <p className="text-start mb-1">Choose date</p>
-                    <DateRangePicker>
-                        <input type="text" className="form-control m-auto"/>
-                    </DateRangePicker>
+                    <DateRangePicker oneTap showOneCalendar hoverRange="week" ranges={[]}/>
                 </div>
                 {sendError ? <SendError/> : null}
                 <button className="btn btn-secondary fw-bold w-50 mb-5" onClick={sendReport}>Send Weekly Report</button>

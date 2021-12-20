@@ -4,6 +4,9 @@ body {
   overflow-x: hidden;
   background-color: $article-bg;
 }
+a{
+  text-decoration: none !important;
+}
 main {
   margin-left: 300px;
 }
