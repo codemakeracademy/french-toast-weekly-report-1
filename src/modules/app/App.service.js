@@ -5,7 +5,11 @@ export const getUserBySub = (sub) => {
         .then((response) => response.data);
 };
 
-export const getCompanyById = (id) => {
-    return api.get(`companies${id}`, {validateStatus: false})
-        .then((response) => response.data);
+export const setUserToLocalstorage = async (sub) => {
+    let teamMember = await api.get(`team-members/${sub}`, {validateStatus: false})
+    let company = await api.get(`companies/${teamMember.data.companyId}`, {validateStatus: false})
+    localStorage.setItem("user", JSON.stringify({...teamMember.data, ...company.data }))
 };
+
+
+
