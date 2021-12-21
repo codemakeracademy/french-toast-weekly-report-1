@@ -42,7 +42,8 @@ export const NewCompany = ({onButton}) => {
             setSubmitting(false);
         }, 400);
     }
-    
+
+
     return (
         <>
             <HelmetComponent title="New Company" />
