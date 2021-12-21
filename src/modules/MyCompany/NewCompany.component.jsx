@@ -12,25 +12,25 @@ export const NewCompany = ({onButton}) => {
     const {user, logout} = useAuth0();
 
     const addNewCompanyAndTeamMember = async (values) => {
-        let today = new Date()
-        let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate()
-        let bodyCompany = {
+        const today = new Date()
+        const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate()
+        const bodyCompany = {
             CompanyName: values.companyName,
             JoinDate: date
         }
 
-        let responseCompany = await api.post(`companies`, bodyCompany)
+        const responseCompany = await api.post(`companies`, bodyCompany)
         console.log(responseCompany)
 
-        let bodyTeamMember = {
+        const bodyTeamMember = {
             FirstName: values.firstName,
             LastName: values.lastName,
-            Title: "Manager",
+            Title: "",
             Mail: user.email,
             Subject: user.sub,
             CompanyId: responseCompany.data.companyId
         }
-        let responseTeamMember = await api.post(`companies/${responseCompany.data.companyId}/team-members`, bodyTeamMember)
+        const responseTeamMember = await api.post(`companies/${responseCompany.data.companyId}/team-members`, bodyTeamMember)
         onButton(true)
         console.log(responseTeamMember)
 

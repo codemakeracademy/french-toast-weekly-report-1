@@ -1,7 +1,7 @@
 import React from "react";
 import {ErrorMessage, Field} from "formik";
 
-export const Textarea = ({label, name, ...rest}) => {
+export const TextArea = ({label, name, ...rest}) => {
     return(
         <div>
             <label htmlFor={name}>{label}</label>
@@ -11,3 +11,5 @@ export const Textarea = ({label, name, ...rest}) => {
         </div>
     )
 }
+
+export default TextArea;
