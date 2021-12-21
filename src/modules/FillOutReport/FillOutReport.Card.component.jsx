@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { smilesStore } from "../../store/smilesStore";
+import { ErrorMessage, Field } from "formik";
 
 export const FillOutCard = (props) => {
     const [active, setActive] = useState(null);
@@ -9,21 +10,45 @@ export const FillOutCard = (props) => {
     };
 
     const [showTextArea, setShowTextArea] = useState(false);
-    const ShowTextArea = () => <textarea className="w-75 m-auto mt-3 form-control" rows="5" placeholder={"Would you like to add any comments about why you rated your " + props.name + " this way? *Optional"}></textarea>;
+    const ShowTextArea = () => {
+        return (
+            <>
+                <Field as="textarea" className="w-75 m-auto mt-3 form-control" rows="5" placeholder={`Would you like to add any comments about why you rated your  ${props.name} this way? *Optional`} name={`${props.name}Comment`} />
+                <ErrorMessage name={`${props.name}Comment`} component="div" />
+            </>
+        );
+    };
+
     return (
         <div>
             <h3 className={"fw-bold m-auto mt-5"}>How was your {props.name} this week?</h3>
             <div className={"container w-75 mt-3"}>
                 <div className={"row"}>
-                    {smilesStore.map((item, index) => (
+                    {smilesStore.map((item, index) => {
+                        index++;
+                        return(
                         <div key={index} className="custom-rb col m-2">
                             <img
+                                id={index}
                                 alt="smile"
                                 className="emotes"
                                 src={index === active ? item.imageOnClick : item.imageDefault}
-                                onClick={() => {
+                                onClick={(e) => {
                                     changeImage(index);
                                     setShowTextArea(true);
+
+                                    if (e.target.hasAttribute("name")) {
+                                        setActive(-1);
+                                        e.target.removeAttribute("name");
+                                        setShowTextArea(false);
+                                    } else {
+                                        try {
+                                            document.querySelector(`[name=${props.name}Value]`).removeAttribute("name");
+                                        } catch (err) {
+                                            console.log(err);
+                                        }
+                                        e.target.setAttribute("name", `${props.name}Value`);
+                                    }
                                 }}
                                 onMouseOver={() => {
                                     if (!showTextArea) {
@@ -37,8 +62,8 @@ export const FillOutCard = (props) => {
                                 }}
                             />
                             <p>{item.Text}</p>
-                        </div>
-                    ))}
+                        </div>);
+                    })}
                 </div>
             </div>
             {showTextArea ? <ShowTextArea /> : null}

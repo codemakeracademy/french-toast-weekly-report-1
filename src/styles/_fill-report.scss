@@ -49,4 +49,7 @@ input {
 }
 .custom-rb{
   background-color: white;
+  & img {
+    cursor: pointer;
+  }
 }

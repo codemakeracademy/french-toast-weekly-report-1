@@ -19,7 +19,7 @@ export function App() {
         try {
             appService.getUserBySub(user.sub)
                 .then(res => {
-                    res ? console.log("true") : console.log(false);
+                    // res ? console.log("true") : console.log(false);
                     res ? setHasCompany(true) : setHasCompany(false);
                 });
         } catch {
