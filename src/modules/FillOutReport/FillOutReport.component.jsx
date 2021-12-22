@@ -34,7 +34,7 @@ export const FillOutReport = () => {
             console.log(values);
             //здесь 48 и 2 - захардкоженные companyId и teamMemberId из конкретно моей БД
             //в дальнейшем будут браться актуальные значения из хранилища
-            createWeeklyReport(values,48,2).then(response => console.log(response));
+            createWeeklyReport(values,2,8).then(response => console.log(response));
         }
         
     }
