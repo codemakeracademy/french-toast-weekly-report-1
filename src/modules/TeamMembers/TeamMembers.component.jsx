@@ -1,18 +1,40 @@
-import { teamMemberStore } from "../../store/teamMemberStore";
-import React from "react";
+import React, {useState, useContext, useEffect} from "react";
 import { Header } from "../common/Header/Header.component";
-import { NavLink } from "react-router-dom";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
+import {getTeamMembers} from "./TemMembers.service";
+import {Context} from "../app/App.component";
+import {TeamMemberCard} from "./TeamMemberCard.component";
+import {getJoinDate} from "../common/function";
 
 
-export const TeamMembers = ({ onClickEdit }) => {
+export const TeamMembers = () => {
+    const {currentUser} = useContext(Context);
+
+
+    const [teamMembers, setTeamMembers] = useState(null);
+
+    const dateTitle = getJoinDate(currentUser.joinDate)
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const teamMemberResponse = await getTeamMembers(currentUser.companyId)
+                setTeamMembers(teamMemberResponse)
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchData()
+
+    }, [])
     return (
         <>
             <HelmetComponent title="Team Members"/>
             <Header>
                 <div>
-                    <h1 className="header-title">ANKO Technologies Corp</h1>
-                    <span className="header-subtitle">Joined January 2020</span>
+                    <h1 className="header-title">{currentUser.companyName}</h1>
+                    <span className="header-subtitle">{dateTitle}</span>
                 </div>
             </Header>
             <div className="team-members row justify-content-md-center">
@@ -22,22 +44,9 @@ export const TeamMembers = ({ onClickEdit }) => {
                         <div className="mt-3 short-line mx-auto"> </div>
                     </div>
                     <ul className="list-group">
-                        {teamMemberStore.map((item, index) => (
-                            <li key={index} className="p-3 shadow-sm rounded list-group-item mb-2 d-flex border-1 align-items-center justify-content-between text-center">
-                                <div className="d-flex align-items-center">
-                                    <div className="round p-2 rounded-circle">
-                                        {item
-                                            .split(" ")
-                                            .map((n) => n[0])
-                                            .join("")}
-                                    </div>
-                                    <div className="m-3">{item}</div>
-                                </div>
-                                <NavLink onClick={() => onClickEdit(item)} className="text-decoration-none text-reset" to="/edit-member-information">
-                                    Edit
-                                </NavLink>
-                            </li>
-                        ))}
+                        {teamMembers? teamMembers.map((item, index) => (
+                            <TeamMemberCard key={index} item={item}/>
+                        )): null}
                     </ul>
                 </div>
             </div>

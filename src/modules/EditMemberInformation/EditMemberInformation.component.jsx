@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Header} from "../common/Header/Header.component";
 import {teamMemberStore} from "../../store/teamMemberStore";
 import {EditModal} from "./EditModal.component";
@@ -6,26 +6,44 @@ import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {Form, Formik} from "formik";
 import {TextInput} from "../common/Formik/textInput.component";
 import * as Yup from "yup";
+import {changeMemberInfo} from "./EditMemberInformation.service";
+import {Context} from "../app/App.component";
+import {getMemberInitials, getMembersFullName, getMembersName} from "../common/function";
 
 
-export const EditMemberInformation = ({dataFromBD}) => {
+export const EditMemberInformation = () => {
 
-    const memberInitials = dataFromBD.firstName.split(" ").map((n) => n[0]).join("") + dataFromBD.lastName.split(" ").map((n) => n[0]).join("")
-    const membersFullName = dataFromBD.firstName + " " + dataFromBD.lastName
-    const membersName = "Anton"
+    const [edit, useEdit] = useState(false)
+    const {currentUser, setUpdateMember, selectedMember} = useContext(Context);
+    const [member, setMember] = useState(selectedMember || currentUser)
+
+    useEffect(() => {
+        if (selectedMember && currentUser.teamMemberId !== selectedMember.teamMemberId) {
+            setMember(selectedMember)
+            useEdit(true)
+        } else {
+            setMember(currentUser)
+        }
+    }, [undefined,member]);
+
+    const memberInitials = getMemberInitials(member)
+    const membersFullName = getMembersFullName(member)
+    const membersName = getMembersName(member)
     const [showEdit, setShowEdit] = useState(false)
     const [currentTitle, setCurrentTitle] = useState("")
+
     const onClickEdit = (e) => {
         setShowEdit(true)
         setCurrentTitle(e.target.text)
     }
+
     const onSubmit = (values, {setSubmitting}) => {
         setTimeout(() => {
-            console.log(values)
+            changeMemberInfo(currentUser.teamMemberId, values)
+            setUpdateMember([values.firstName, values.lastName, values.title])
             setSubmitting(false);
         }, 400);
     }
-
     return (
         <>
             <HelmetComponent title="Edit Member Information"/>
@@ -34,7 +52,7 @@ export const EditMemberInformation = ({dataFromBD}) => {
                     <div>{memberInitials}</div>
                 </div>
                 <h1 className="header-title">{membersFullName}</h1>
-                <span className="header-subtitle">anatoliy@ankosoftware.com</span>
+                <span className="header-subtitle">{member.mail}</span>
             </Header>
             <div className="container justify-content-md-center p-5">
                 <div className="col-md-12 p-0">
@@ -48,9 +66,9 @@ export const EditMemberInformation = ({dataFromBD}) => {
 
                         <Formik
                             initialValues={{
-                                firstName: '',
-                                lastName: '',
-                                title: ''
+                                firstName: member.firstName,
+                                lastName: member.lastName,
+                                title: member.title
                             }}
 
                             validationSchema={Yup.object({
@@ -68,18 +86,21 @@ export const EditMemberInformation = ({dataFromBD}) => {
                                 <Form className="col-md-4">
 
                                     <TextInput
+                                        disabled={edit}
                                         label="First Name"
                                         name="firstName"
                                         type="text"
                                         placeholder=""
                                     />
                                     <TextInput
+                                        disabled={edit}
                                         label="Last Name"
                                         name="lastName"
                                         type="text"
                                         placeholder=""
                                     />
                                     <TextInput
+                                        disabled={edit}
                                         label="Title"
                                         name="title"
                                         type="text"
@@ -87,7 +108,7 @@ export const EditMemberInformation = ({dataFromBD}) => {
                                     />
 
                                     <div className="form-group">
-                                        <button disabled={isSubmitting} type="submit"
+                                        <button disabled={edit || isSubmitting} type="submit"
                                                 className="btn btn-warning border-2 shadow-none">Save
                                         </button>
                                     </div>
