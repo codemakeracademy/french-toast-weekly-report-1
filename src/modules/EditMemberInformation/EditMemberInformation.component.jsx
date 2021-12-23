@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {Header} from "../common/Header/Header.component";
 import {teamMemberStore} from "../../store/teamMemberStore";
 import {EditModal} from "./EditModal.component";
@@ -7,51 +7,17 @@ import {Form, Formik} from "formik";
 import {TextInput} from "../common/Formik/textInput.component";
 import * as Yup from "yup";
 import {changeMemberInfo} from "./EditMemberInformation.service";
+import {getMemberInitials, getMembersFullName, getMembersName} from "../common/util/function";
 import {Context} from "../app/App.component";
-import {getMemberInitials, getMembersFullName, getMembersName} from "../common/function";
 
 
-export const EditMemberInformation = ({user}) => {
-    const {currentUser, setUpdateMember, selectedMember} = useContext(Context);
-
-    const [edit, useEdit] = useState(false)
-    const [showForm, setShowForm] = useState(false)
-    const [member, setMember] = useState(selectedMember || currentUser)
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                await user && setMember(currentUser) && useEdit(false)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        fetchData()
-    });
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                selectedMember
-                    ? await setMember(selectedMember)
-
-                    : await setMember(currentUser)
-                if (selectedMember && currentUser.teamMemberId !== selectedMember.teamMemberId) {
-                    useEdit(true)
-                }
-                setShowForm(true)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        fetchData()
-    }, [currentUser, selectedMember]);
-
-
+export const EditMemberInformation = ({member, edit}) => {
+    const {setUpdateMember} = useContext(Context);
 
     const memberInitials = getMemberInitials(member)
     const membersFullName = getMembersFullName(member)
     const membersName = getMembersName(member)
+
     const [showEdit, setShowEdit] = useState(false)
     const [currentTitle, setCurrentTitle] = useState("")
 
@@ -61,12 +27,11 @@ export const EditMemberInformation = ({user}) => {
     }
 
     const onSubmit = (values, {setSubmitting, resetForm}) => {
-        setTimeout(() => {
-            changeMemberInfo(currentUser.teamMemberId, values)
+            changeMemberInfo(member.companyId, values)
+            console.log(values)
             setUpdateMember([values.firstName, values.lastName, values.title])
             setSubmitting(false);
             resetForm()
-        }, 400);
     }
     return (
         <>
@@ -88,11 +53,12 @@ export const EditMemberInformation = ({user}) => {
                     <div className="page-section">
                         <div className="title border-bottom">BASIC PROFILE INFORMATION</div>
 
-                        {showForm && <Formik
+                        <Formik
                             initialValues={{
                                 firstName: member.firstName,
                                 lastName: member.lastName,
-                                title: member.title
+                                title: member.title,
+                                teamMemberId: member.teamMemberId
                             }}
 
                             validationSchema={Yup.object({
@@ -138,7 +104,7 @@ export const EditMemberInformation = ({user}) => {
                                     </div>
                                 </Form>
                             )}
-                        </Formik>}
+                        </Formik>
                     </div>
                     <div className="page-section reports-control">
                         <div

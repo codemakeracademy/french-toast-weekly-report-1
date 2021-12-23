@@ -3,7 +3,6 @@ import {Switch, Route} from 'react-router-dom'
 import {LaunchGuide} from "../../LaunchGuide/LaunchGuide.component";
 import {InviteYourTeam} from "../../InviteYourTeam/InviteYourTeam.component";
 import {TeamMembers} from "../../TeamMembers/TeamMembers.component";
-import {EditMemberInformation} from "../../EditMemberInformation/EditMemberInformation.component";
 import {TeamReports} from "../../TeamReports/TeamReports.component";
 import {FeedbackBtn} from "../buttons/FeedbackBtn..component";
 import {HelpBtn} from "../buttons/HelpBtn..component";
@@ -12,6 +11,7 @@ import {MyReports} from "../../MyReports/MyReports.component";
 import {WeeklyReportHistory} from "../../WeeklyReportHistory/WeeklyReportHistory.component";
 import {Aside} from "../Aside/Aside.component";
 import {MyCompany} from "../../MyCompany/MyCompany.component";
+import {Profile} from "../../EditMemberInformation/Profile";
 
 export const Article = () => {
 
@@ -48,10 +48,10 @@ export const Article = () => {
                             <TeamMembers/>
                         </Route>
                         <Route path="/edit-member-information">
-                            <EditMemberInformation/>
+                            <Profile anotherMember={true}/>
                         </Route>
                         <Route path="/my-profile">
-                            <EditMemberInformation user={true}/>
+                            <Profile/>
                         </Route>
                     </Switch>
                 </article>
