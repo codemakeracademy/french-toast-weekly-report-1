@@ -36,10 +36,8 @@ export const NewCompany = ({onButton}) => {
     }
 
     const onSubmit = (values, {setSubmitting}) => {
-        setTimeout(() => {
             addNewCompanyAndTeamMember(values).then(r => console.log(r))
             setSubmitting(false);
-        }, 400);
     }
 
 

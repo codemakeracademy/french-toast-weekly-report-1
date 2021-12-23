@@ -6,8 +6,6 @@ export const TeamMemberCard = ({item}) => {
 
     const {setSelectedMember} = useContext(Context);
 
-
-
     const fullName = item.firstName + " " + item.lastName
     const initials = (item.firstName.charAt(0) + item.lastName.charAt(0)).toUpperCase()
     return (

@@ -4,18 +4,16 @@ import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {Header} from "../common/Header/Header.component";
 
 export const InvitePage = () => {
+
     const {loginWithRedirect} = useAuth0();
     const currentLocation = window.location;
 
-
     const onClickButton = () => {
+        sessionStorage.setItem("href", currentLocation.search)
+
         loginWithRedirect().then(r => r )
 
     }
-
-
-    console.log(currentLocation)
-
     return(
         <div>
             <HelmetComponent title="Weekly Team Report"/>
