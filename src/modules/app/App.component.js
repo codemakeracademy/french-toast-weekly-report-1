@@ -18,6 +18,7 @@ export function App() {
     const [createNew, setCreateNew] = useState()
     const [updateCompany, setUpdateCompany] = useState()
     const [updateMember, setUpdateMember] = useState()
+    // eslint-disable-next-line no-unused-vars
     const [initialLoading, setInitialLoading] = useState(true)
 
     const [selectedMember, setSelectedMember] = useState()
@@ -48,7 +49,7 @@ export function App() {
         }
     }, [user, updateCompany, updateMember]);
 
-    if (initialLoading || isLoading) {
+    if (isAuthenticated && (isLoading || !currentUser)) {
         return (
             <Loader/>
         )
