@@ -39,6 +39,7 @@ export function App() {
             try {
                 const data = await appService.getUser(user.sub)
                 await setCurrentUser(data)
+
             } catch (error) {
                 console.error(error)
             }
@@ -46,6 +47,7 @@ export function App() {
     }, [user, updateCompany, updateMember]);
 
     if (isAuthenticated && (isLoading || !currentUser))  {
+
         return (
             <Loader/>
         )

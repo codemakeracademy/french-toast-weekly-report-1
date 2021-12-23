@@ -34,7 +34,7 @@ export const FilledCard = (reportData, index) =>{
                 </div>
                 }
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className="text-start">
                 <div className="param d-flex align-items-start mb-2">
                     <div className="button-wrapper mr-3">
                         <img className="smile-icon" src={imgArray[reportData.reportData.moraleValueId]} alt="smile morale" />
@@ -69,7 +69,7 @@ export const FilledCard = (reportData, index) =>{
 export const NotFilledCard = (reportData) =>{
     return(
         <div className="p-2">
-            <div className="d-flex align-items-center">
+            <div className="d-flex text-start">
                 <div
                     className="round p-3 rounded-circle">{reportData.reportData.firstName.substr(0,1) + reportData.reportData.lastName.substr(0,1)}</div>
                 <div className="ms-3 my-1">
