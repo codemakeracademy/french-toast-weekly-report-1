@@ -54,17 +54,17 @@ export const WeeklyReportHistory = () => {
     }
 
     async function getReports(){
-        const companyId = 1;
+        const companyId = 48;
         return [
-            await api.get(`companies/${companyId}/team-members/0/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
+            await api.get(`companies/${companyId}/team-members/2/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
                 .then((response) => response.data),
-            await api.get(`companies/${companyId}/team-members/0/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, {validateStatus: false})
+            await api.get(`companies/${companyId}/team-members/2/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, {validateStatus: false})
                 .then((response) => response.data)
         ];
     }
 
     async function InitReports() {
-        const data = await getWeeklyReportHistory(24, "20211018", "20211220");
+        const data = await getWeeklyReportHistory(48, "20211018", "20211220");
         setReportHistory(data);
         let teamMembersTemp = [];
         data.forEach((item) => {
@@ -86,6 +86,7 @@ export const WeeklyReportHistory = () => {
     },[]);
 
     const {currentUser, selectedMember} = useContext(Context);
+    console.log('currentUser: ', currentUser);
 
     return (
         <>

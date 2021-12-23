@@ -22,7 +22,7 @@ export const TeamReports = () => {
     }
     const [reports, setReports] = useState([]);
     async function getReports(){
-        const companyId = 0, teamMemberId = 5; // teamMemberId - TEMP
+        const companyId = 48, teamMemberId = 2; // teamMemberId - TEMP
         return [
             await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
                 .then((response)=> response.data),
