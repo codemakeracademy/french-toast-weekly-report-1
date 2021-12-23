@@ -24,45 +24,42 @@ export const FillOutCard = (props) => {
             <h3 className={"fw-bold m-auto mt-5"}>How was your {props.name} this week?</h3>
             <div className={"container w-75 mt-3"}>
                 <div className={"row"}>
-                    {smilesStore.map((item, index) => {
+                    {smilesStore.slice(1).map((item, index) => {
                         index++;
-                        return(
-                        <div key={index} className="custom-rb col m-2">
-                            <img
-                                id={index}
-                                alt="smile"
-                                className="emotes"
-                                src={index === active ? item.imageOnClick : item.imageDefault}
-                                onClick={(e) => {
-                                    changeImage(index);
-                                    setShowTextArea(true);
-
-                                    if (e.target.hasAttribute("name")) {
-                                        setActive(-1);
-                                        e.target.removeAttribute("name");
-                                        setShowTextArea(false);
-                                    } else {
-                                        try {
-                                            document.querySelector(`[name=${props.name}Value]`).removeAttribute("name");
-                                        } catch (err) {
-                                            console.log(err);
-                                        }
-                                        e.target.setAttribute("name", `${props.name}Value`);
-                                    }
-                                }}
-                                onMouseOver={() => {
-                                    if (!showTextArea) {
+                        return (
+                            <div key={index} className="custom-rb col m-2">
+                                <img
+                                    id={index}
+                                    alt="smile"
+                                    className="emotes"
+                                    src={index === active ? item.imageOnClick : item.imageDefault}
+                                    onClick={(e) => {
                                         changeImage(index);
-                                    }
-                                }}
-                                onMouseLeave={() => {
-                                    if (!showTextArea) {
-                                        setActive(-1);
-                                    }
-                                }}
-                            />
-                            <p>{item.Text}</p>
-                        </div>);
+                                        setShowTextArea(true);
+
+                                        if (e.target.hasAttribute("name")) {
+                                            setActive(-1);
+                                            e.target.removeAttribute("name");
+                                            setShowTextArea(false);
+                                        } else {
+                                            document.querySelector(`[name=${props.name}Value]`)?.removeAttribute("name");
+                                            e.target.setAttribute("name", `${props.name}Value`);
+                                        }
+                                    }}
+                                    onMouseOver={() => {
+                                        if (!showTextArea) {
+                                            changeImage(index);
+                                        }
+                                    }}
+                                    onMouseLeave={() => {
+                                        if (!showTextArea) {
+                                            setActive(-1);
+                                        }
+                                    }}
+                                />
+                                <p>{item.Text}</p>
+                            </div>
+                        );
                     })}
                 </div>
             </div>
