@@ -5,35 +5,28 @@ import { NavLink } from "react-router-dom";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import { api } from "../api/api.service";
 import {MyReportsCard} from "../MyReports/MyReports.Card.component";
+import * as Dates from "../common/Utiles/DateUtiles";
 
 export const TeamReports = () => {
     const [activeTeam, setActiveTeam] = useState(0);
     const [activePeriod, setActivePeriod] = useState(1);
-    const today = new Date;
-    const firstdayPrev = new Date;
-    const lastdayPrev = new Date;
-    const first = today.getDate() - today.getDay() + 1;
-    const last = first + 6;
-    const firstday = new Date(today.setDate(first));
-    const lastday = new Date(today.setDate(last));
-
-    function DateToString(date){
-        return date.getFullYear() + "-" +(date.getMonth() + 1) + "-" + date.getDate()
-    }
-    firstdayPrev.setDate(firstday.getDate()-7);
-    lastdayPrev.setDate(lastday.getDate()-7);
-    const periods = ["Previous period: " + DateToString(firstdayPrev) + " — " + DateToString(lastdayPrev),
-        "Current period: " + DateToString(firstday) + " — " + DateToString(lastday),"Older Reports"];
+    const dates = Dates.getCurrentAndPreviousDate();
+    const firstday = dates[0];
+    const lastday = dates[1];
+    const firstdayPrev = dates[2];
+    const lastdayPrev = dates[3];
+    const periods = ["Previous period: " + Dates.DateToString(firstdayPrev) + " — " + Dates.DateToString(lastdayPrev),
+        "Current period: " + Dates.DateToString(firstday) + " — " + Dates.DateToString(lastday),"Older Reports"];
     const initials = (item) => {
         return item.split(" ").map((n) => n[0]).join("")
     }
     const [reports, setReports] = useState([]);
     async function getReports(){
-        const companyId = 1, teamMemberId = 5; // teamMemberId - TEMP
+        const companyId = 0, teamMemberId = 5; // teamMemberId - TEMP
         return [
-            await api.get(`https://localhost:5001/api/companies/${companyId}/team-members/${teamMemberId}/reports/to/${DateToString(firstdayPrev)}/${DateToString(lastdayPrev)}`, {validateStatus: false})
+            await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
                 .then((response)=> response.data),
-            await api.get(`https://localhost:5001/api/companies/${companyId}/team-members/${teamMemberId}/reports/to/${DateToString(firstday)}/${DateToString(lastday)}`, {validateStatus: false})
+            await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, {validateStatus: false})
                 .then((response)=> response.data)
         ];
     }
@@ -79,9 +72,6 @@ export const TeamReports = () => {
                                                         className="round-yellow round p-2 rounded-circle">+{teamMemberStore.length - 4}</div>
                     }
                 </div>
-                <h1 className="fw-lighter pt-4">Your team <span
-                    className="fw-bolder">has not submitted reports</span> this weak
-                </h1>
             </Header>
             <div className="pb-2 text-center">
                 <div className="pt-5">
@@ -113,7 +103,6 @@ export const TeamReports = () => {
                         <MyReportsCard reportData={item} key={index}/>
                     )
                 }) : <div className="w-100 text-center bg-white mt-2 p-3">There are no members which send reports to you</div>}
-                
             </div>
         </>
     )
