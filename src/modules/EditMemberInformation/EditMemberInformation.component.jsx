@@ -33,6 +33,7 @@ export const EditMemberInformation = ({member, edit}) => {
             setSubmitting(false);
             resetForm()
     }
+
     return (
         <>
             <HelmetComponent title="Edit Member Information" />
