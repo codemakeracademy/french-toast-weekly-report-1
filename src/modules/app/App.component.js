@@ -18,9 +18,6 @@ export function App() {
     const [createNew, setCreateNew] = useState()
     const [updateCompany, setUpdateCompany] = useState()
     const [updateMember, setUpdateMember] = useState()
-    const [initialLoading, setInitialLoading] = useState(true)
-
-    const [selectedMember, setSelectedMember] = useState()
 
     useEffect(() => {
         if (user && user.sub) {
@@ -29,6 +26,7 @@ export function App() {
                     .then(res => {
                         res ? setHasCompany(true) : setHasCompany(false);
                     })
+
             } catch (error) {
                 console.error(error)
             }
@@ -40,22 +38,21 @@ export function App() {
         if (user && user.sub) {
             try {
                 const data = await appService.getUser(user.sub)
-                setCurrentUser(data)
-                setInitialLoading(false)
+                await setCurrentUser(data)
             } catch (error) {
                 console.error(error)
             }
         }
     }, [user, updateCompany, updateMember]);
 
-    if (initialLoading || isLoading) {
+    if (isAuthenticated && (isLoading || !currentUser))  {
         return (
             <Loader/>
         )
     }
 
     return (
-        <Context.Provider value={{currentUser, setUpdateMember, setUpdateCompany, selectedMember, setSelectedMember}}>
+        <Context.Provider value={{currentUser, setUpdateMember, setUpdateCompany}}>
             {currentLocation.pathname === "/invite"
                 ? (isAuthenticated
                     ? newTeamMember() && <Article/>

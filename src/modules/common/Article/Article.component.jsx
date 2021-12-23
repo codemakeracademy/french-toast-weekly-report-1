@@ -47,7 +47,7 @@ export const Article = () => {
                         <Route path="/team-members">
                             <TeamMembers/>
                         </Route>
-                        <Route path="/edit-member-information">
+                        <Route path="/edit-member-information/:id">
                             <Profile anotherMember={true}/>
                         </Route>
                         <Route path="/my-profile">
