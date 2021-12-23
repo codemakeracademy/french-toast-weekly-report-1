@@ -50,11 +50,11 @@ export const WeeklyReportHistory = () => {
     }
 
     async function getReports(){
-        const companyId = 1;
+        const companyId = 48;
         return [
-            await api.get(`companies/${companyId}/team-members/0/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
+            await api.get(`companies/${companyId}/team-members/2/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
                 .then((response) => response.data),
-            await api.get(`companies/${companyId}/team-members/0/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, {validateStatus: false})
+            await api.get(`companies/${companyId}/team-members/2/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, {validateStatus: false})
                 .then((response) => response.data)
         ];
     }
@@ -88,6 +88,7 @@ export const WeeklyReportHistory = () => {
     }
 
     const {currentUser, selectedMember} = useContext(Context);
+    console.log('currentUser: ', currentUser);
 
     return (
         <>

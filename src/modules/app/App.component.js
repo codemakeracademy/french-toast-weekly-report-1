@@ -46,8 +46,7 @@ export function App() {
         }
     }, [user, updateCompany, updateMember]);
 
-    if (isAuthenticated && (isLoading || !currentUser))  {
-
+    if (isAuthenticated && (isLoading || !currentUser)) {
         return (
             <Loader/>
         )

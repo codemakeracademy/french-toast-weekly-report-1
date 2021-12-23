@@ -28,7 +28,6 @@ export const EditMemberInformation = ({member, edit}) => {
 
     const onSubmit = (values, {setSubmitting, resetForm}) => {
             changeMemberInfo(member.companyId, values)
-            console.log(values)
             setUpdateMember([values.firstName, values.lastName, values.title])
             setSubmitting(false);
             resetForm()
@@ -58,7 +57,8 @@ export const EditMemberInformation = ({member, edit}) => {
                                 firstName: member.firstName,
                                 lastName: member.lastName,
                                 title: member.title,
-                                teamMemberId: member.teamMemberId
+                                teamMemberId: member.teamMemberId,
+                                companyId: member.companyId
                             }}
 
                             validationSchema={Yup.object({
