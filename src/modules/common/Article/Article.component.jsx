@@ -11,9 +11,9 @@ import {FillOutReport} from "../../FillOutReport/FillOutReport.component";
 import {MyReports} from "../../MyReports/MyReports.component";
 import {WeeklyReportHistory} from "../../WeeklyReportHistory/WeeklyReportHistory.component";
 import {Aside} from "../Aside/Aside.component";
-import {EditMyCompany} from "../../MyCompany/EditMyCompany.component";
+import {MyCompany} from "../../MyCompany/MyCompany.component";
 
-export const Article = () => {
+export const Article = ({dataFromBD, setUpdateLocalstorage}) => {
 
     const [editableMember, setEditableMember] = useState(null)
     const onClickEdit = (member) => {
@@ -47,13 +47,13 @@ export const Article = () => {
                             <WeeklyReportHistory/>
                         </Route>
                         <Route path="/my-company">
-                            <EditMyCompany/>
+                            <MyCompany dataFromBD={dataFromBD} setUpdateLocalstorage={setUpdateLocalstorage}/>
                         </Route>
                         <Route path="/team-members">
                             <TeamMembers onClickEdit={onClickEdit}/>
                         </Route>
                         <Route path="/edit-member-information">
-                            <EditMemberInformation editableMember={editableMember}/>
+                            <EditMemberInformation dataFromBD={dataFromBD} editableMember={editableMember}/>
                         </Route>
                     </Switch>
                 </article>

@@ -1,17 +1,48 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
 import { Header } from "../common/Header/Header.component";
 import { WeekAgo } from "./WeekAgo.component";
+import { WeeksHeader } from "./WeeksHeader.component";
 import { weekAgoStore } from "../../store/weekAgoStore";
-import { smiles } from "../../store/weekAgoStore";
-import { teamMemberStore } from "../../store/teamMemberStore";
 import { WeeklyReportHistoryCard } from "./WeeklyReportHistoryCard.component";
+import { WeeklyReportHistoryCardAverage } from "./WeeklyReportHistoryCardAverage.component";
 import { NavLink } from "react-router-dom";
 import { HelmetComponent } from "../common/Helmet/Helmet.component";
+import moment from "moment";
+import getWeeklyReportHistory from "./WeeklyReport.service";
 
 export const WeeklyReportHistory = () => {
     const [activeTeam, setActiveTeam] = useState(1);
-    const [activePeriod, setActivePeriod] = useState(0);
+    const [activePeriod, setActivePeriod] = useState(2);
     const [activeMoraleFilter, setActiveMoraleFilter] = useState(0);
+    const [reportHistory, setReportHistory] = useState([]);
+    const [teamMembers, setTeamMembers] = useState([]);
+
+    const averageMorales = ["Overall", "Morales", "Stress", "Workload"];
+
+    function getCurrentPeriod() {
+        const startDate = moment().startOf("isoWeek");
+        const endDate = moment().endOf("isoWeek");
+        return `${startDate.month() + 1}/${startDate.date()} - ${endDate.month() + 1}/${endDate.date()}`;
+    }
+
+    function getPreviousPeriod() {
+        const startDate = moment().subtract(1, "week").startOf("isoWeek");
+        const endDate = moment().subtract(1, "week").endOf("isoWeek");
+        return `${startDate.month() + 1}/${startDate.date()} - ${endDate.month() + 1}/${endDate.date()}`;
+    }
+
+    async function InitReports() {
+        const data = await getWeeklyReportHistory(48, "20211018", "20211220");
+        setReportHistory(data);
+        let teamMembersTemp = [];
+        data.forEach((item) => {
+            teamMembersTemp.push(item["teamMemberName"]);
+        });
+        setTeamMembers(teamMembersTemp);
+    }
+
+    useEffect(InitReports, []);
 
     return (
         <>
@@ -31,11 +62,12 @@ export const WeeklyReportHistory = () => {
                     <div className="header-team-text mt-4">Get a bigger picture of how your team has been doing over time.</div>
                 </div>
             </Header>
+
             <div className=" team-members row justify-content-md-center">
                 <div className="col-md-9">
                     <div className="pb-4 text-center">
                         <div className="pt-5">
-                            {["Previous period: 5/16 - 5/22", "Current Period: 5/23 - 5/29", "Older Reports"].map((item, index) => (
+                            {[`Previous period: ${getPreviousPeriod()}`, `Current Period: ${getCurrentPeriod()}`, "Older Reports"].map((item, index) => (
                                 <button key={index} className={activePeriod === index ? "py-0 btn btn-dark btnActive" : "py-0 btn btn-dark btnDisable"} onClick={() => setActivePeriod(index)}>
                                     {item}
                                 </button>
@@ -55,13 +87,32 @@ export const WeeklyReportHistory = () => {
                         </div>
                         <div className="overall container d-flex flex-column mt-5">
                             <div className="weeks-block d-flex align-items-center justify-content-end">
-                                <div className="weeks d-flex align-items-center justify-content-between mb-1 mr-4">
-                                    {weekAgoStore.map((item, index) => (
-                                        <WeekAgo key={index} period={item} />
-                                    ))}
-                                </div>
+                                {activePeriod == 2 && (
+                                    <WeeksHeader align="between">
+                                        {weekAgoStore.map((item, index) => (
+                                            <WeekAgo key={index} period={item} />
+                                        ))}
+                                    </WeeksHeader>
+                                )}
+
+                                {activePeriod == 1 && (
+                                    <WeeksHeader align="end">
+                                        {["Current"].map((item, index) => (
+                                            <WeekAgo key={index} period={item} />
+                                        ))}
+                                    </WeeksHeader>
+                                )}
+
+                                {activePeriod == 0 && (
+                                    <WeeksHeader align="end">
+                                        {["Previous"].map((item, index) => (
+                                            <WeekAgo key={index} period={item} />
+                                        ))}
+                                    </WeeksHeader>
+                                )}
                             </div>
-                            <WeeklyReportHistoryCard cardName="Overall" smiles={smiles} />
+
+                            <WeeklyReportHistoryCardAverage cardName={averageMorales[activeMoraleFilter]} reportHistory={reportHistory} filter={activeMoraleFilter} />
                         </div>
 
                         <div className="pt-5">
@@ -70,14 +121,33 @@ export const WeeklyReportHistory = () => {
                         </div>
                         <div className="extended-team container d-flex flex-column mt-5">
                             <div className="weeks-block d-flex align-items-center justify-content-end">
-                                <div className="weeks d-flex align-items-center justify-content-between mb-1 mr-4">
-                                    {weekAgoStore.map((item, index) => (
-                                        <WeekAgo key={index} period={item} />
-                                    ))}
-                                </div>
+                                {activePeriod == 2 && (
+                                    <WeeksHeader align="between">
+                                        {weekAgoStore.map((item, index) => (
+                                            <WeekAgo key={index} period={item} />
+                                        ))}
+                                    </WeeksHeader>
+                                )}
+
+                                {activePeriod == 1 && (
+                                    <WeeksHeader align="end">
+                                        {["Current"].map((item, index) => (
+                                            <WeekAgo key={index} period={item} />
+                                        ))}
+                                    </WeeksHeader>
+                                )}
+
+                                {activePeriod == 0 && (
+                                    <WeeksHeader align="end">
+                                        {["Previous"].map((item, index) => (
+                                            <WeekAgo key={index} period={item} />
+                                        ))}
+                                    </WeeksHeader>
+                                )}
                             </div>
-                            {teamMemberStore.map((item, index) => (
-                                <WeeklyReportHistoryCard key={index} cardName={item} smiles={smiles} />
+
+                            {teamMembers.map((item, index) => (
+                                <WeeklyReportHistoryCard key={index} cardName={item} id={index.toString()} reportHistory={reportHistory} filter={activeMoraleFilter} />
                             ))}
                         </div>
                     </div>
