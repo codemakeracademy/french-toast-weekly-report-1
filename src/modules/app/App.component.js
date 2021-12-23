@@ -6,24 +6,26 @@ import {InvitePage} from "../InvitePage/InvitePage.component";
 import {NewCompany} from "../MyCompany/NewCompany.component";
 import * as appService from "./App.service";
 
+export const Context = React.createContext(null)
+
 export function App() {
+    const [currentUser, setCurrentUser] = useState()
     const {isAuthenticated, user} = useAuth0();
     const currentLocation = window.location;
     const [hasCompany, setHasCompany] = useState(false)
     const [createNew, setCreateNew] = useState()
-    const [updateLocalstorage, setUpdateLocalstorage] = useState()
-    const [dataFromBD, setDataFromBD] = useState(JSON.parse(localStorage.getItem("user")))
+    const [updateCompany, setUpdateCompany] = useState()
+    const [updateMember, setUpdateMember] = useState()
 
+    const [selectedMember, setSelectedMember] = useState()
 
 
     useEffect(() => {
         try {
-            debugger
-            appService.getUserBySub(user.sub)
+            (user && user.sub && appService.getUserBySub(user.sub)
                 .then(res => {
-                    // res ? console.log("true") : console.log(false);
                     res ? setHasCompany(true) : setHasCompany(false);
-                });
+                }))
 
         } catch(error) {
             console.error(error)
@@ -34,30 +36,29 @@ export function App() {
     useEffect(() => {
         async function fetchData() {
             try {
-                await appService.setUserToLocalstorage(user.sub)
-                await setDataFromBD(JSON.parse(localStorage.getItem("user")))
+                const data = await (user && user.sub && appService.getUser(user.sub))
+                setCurrentUser(data)
             } catch (error) {
                 console.error(error)
             }
         }
         fetchData()
-    }, [user,updateLocalstorage]);
-
+    }, [user, updateCompany, updateMember]);
 
 
     return (
-        <>
+        <Context.Provider value={{currentUser, setUpdateMember, setUpdateCompany, selectedMember, setSelectedMember}}>
             {currentLocation.pathname === "/invite"
                 ? (isAuthenticated
                     ? <Article />
                     : <InvitePage/>)
                 : (isAuthenticated && hasCompany)
-                    ? <Article dataFromBD={dataFromBD} setUpdateLocalstorage={setUpdateLocalstorage}/>
+                    ? <Article/>
                     : (isAuthenticated && !hasCompany)
                         ? <NewCompany onButton={setCreateNew}/>
                         : <WelcomePage/>
             }
-        </>
+        </Context.Provider>
     );
 }
 

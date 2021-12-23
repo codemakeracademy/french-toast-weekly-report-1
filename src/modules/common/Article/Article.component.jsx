@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Switch, Route} from 'react-router-dom'
 import {LaunchGuide} from "../../LaunchGuide/LaunchGuide.component";
 import {InviteYourTeam} from "../../InviteYourTeam/InviteYourTeam.component";
@@ -13,12 +13,7 @@ import {WeeklyReportHistory} from "../../WeeklyReportHistory/WeeklyReportHistory
 import {Aside} from "../Aside/Aside.component";
 import {MyCompany} from "../../MyCompany/MyCompany.component";
 
-export const Article = ({dataFromBD, setUpdateLocalstorage}) => {
-
-    const [editableMember, setEditableMember] = useState(null)
-    const onClickEdit = (member) => {
-        setEditableMember(member)
-    }
+export const Article = () => {
 
     return (
         <div className="wrapper d-flex w-100 h-100">
@@ -47,13 +42,16 @@ export const Article = ({dataFromBD, setUpdateLocalstorage}) => {
                             <WeeklyReportHistory/>
                         </Route>
                         <Route path="/my-company">
-                            <MyCompany dataFromBD={dataFromBD} setUpdateLocalstorage={setUpdateLocalstorage}/>
+                            <MyCompany/>
                         </Route>
                         <Route path="/team-members">
-                            <TeamMembers onClickEdit={onClickEdit}/>
+                            <TeamMembers/>
                         </Route>
                         <Route path="/edit-member-information">
-                            <EditMemberInformation dataFromBD={dataFromBD} editableMember={editableMember}/>
+                            <EditMemberInformation/>
+                        </Route>
+                        <Route path="/my-profile">
+                            <EditMemberInformation user={true}/>
                         </Route>
                     </Switch>
                 </article>

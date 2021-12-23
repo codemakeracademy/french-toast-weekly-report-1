@@ -1,26 +1,27 @@
 import {NavLink} from "react-router-dom";
-import React from "react";
+import React, {useContext} from "react";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {Header} from "../common/Header/Header.component";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {changeNameCompany} from "./MyCompany.service";
+import {Context} from "../app/App.component";
+import {getJoinDate} from "../common/function";
 
 
-export const MyCompany = ({dataFromBD, setUpdateLocalstorage}) => {
+export const MyCompany = () => {
 
-    const currentUser = dataFromBD
+    const {currentUser, setUpdateCompany} = useContext(Context);
+
 
     const onSubmit = (values, {setSubmitting, resetForm}) => {
         setTimeout(() => {
-            changeNameCompany(currentUser.companyId, values.companyName, currentUser.joinDate)
-            setUpdateLocalstorage(values.companyName)
+            changeNameCompany(currentUser.companyId, values.companyName)
+            setUpdateCompany(values.companyName)
             setSubmitting(false);
             resetForm()
         }, 400);
     }
-    const date = new Date(currentUser.joinDate)
-    const month = date.toLocaleString('en-us', { month: 'long' });
-    const dateTitle = `Joined ${month} ${date.getFullYear()}`
+    const dateTitle = getJoinDate(currentUser.joinDate)
 
     return (
         <>
