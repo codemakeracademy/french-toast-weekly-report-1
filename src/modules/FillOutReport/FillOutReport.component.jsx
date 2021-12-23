@@ -34,7 +34,7 @@ export const FillOutReport = () => {
             console.log(values);
             //здесь и чуть ниже в initialValues 48 и 7 - захардкоженные companyId и teamMemberId из конкретно моей БД
             //в дальнейшем будут браться актуальные значения из хранилища
-            createWeeklyReport(values,48,7).then(response => console.log(response));
+            createWeeklyReport(values,4,3).then(response => console.log(response));
         }
         
     }
@@ -58,7 +58,7 @@ export const FillOutReport = () => {
                         AnythingElseComment: "",
                         DateFrom: "",
                         DateTo: "",
-                        TeamMemberId: 7
+                        TeamMemberId: 3
                     }}
                     validationSchema={Yup.object({
                         MoraleComment: Yup.string().max(600, 'Must be 600 characters or less'),

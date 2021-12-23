@@ -3,23 +3,23 @@ import {Header} from "../common/Header/Header.component";
 import {teamMemberStore} from "../../store/teamMemberStore";
 import {EditModal} from "./EditModal.component";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
-import {ErrorMessage, Field, Form, Formik} from "formik";
-import {useAuth0} from "@auth0/auth0-react";
+import {Form, Formik} from "formik";
+import {TextInput} from "../common/Formik/textInput.component";
+import * as Yup from "yup";
 
 
-export const EditMemberInformation = ({editableMember}) => {
-    const {user} = useAuth0();
+export const EditMemberInformation = ({dataFromBD}) => {
 
-    const memberInitials = editableMember ? editableMember.split(" ").map((n)=>n[0]).join("") : user.nickname.split(" ").map((n)=>n[0]).join("")
-    const membersFullName = editableMember ? editableMember : user.nickname
-    const membersName = editableMember ? editableMember.split(" ")[0] : user.nickname
+    const memberInitials = dataFromBD.firstName.split(" ").map((n) => n[0]).join("") + dataFromBD.lastName.split(" ").map((n) => n[0]).join("")
+    const membersFullName = dataFromBD.firstName + " " + dataFromBD.lastName
+    const membersName = "Anton"
     const [showEdit, setShowEdit] = useState(false)
     const [currentTitle, setCurrentTitle] = useState("")
     const onClickEdit = (e) => {
         setShowEdit(true)
         setCurrentTitle(e.target.text)
     }
-    const onSubmit = (values, { setSubmitting }) => {
+    const onSubmit = (values, {setSubmitting}) => {
         setTimeout(() => {
             console.log(values)
             setSubmitting(false);
@@ -47,63 +47,84 @@ export const EditMemberInformation = ({editableMember}) => {
                         <div className="title border-bottom">BASIC PROFILE INFORMATION</div>
 
                         <Formik
-                            initialValues={{ firstName: '', lastName: '', title: '' }}
+                            initialValues={{
+                                firstName: '',
+                                lastName: '',
+                                title: ''
+                            }}
+
+                            validationSchema={Yup.object({
+                                firstName: Yup.string()
+                                    .max(20, 'Must be 20 characters or less'),
+                                lastName: Yup.string()
+                                    .max(20, 'Must be 20 characters or less'),
+                                title: Yup.string()
+                                    .max(100, 'Must be 100 characters or less'),
+                            })}
+
                             onSubmit={onSubmit}
                         >
-                            {({ isSubmitting }) => (
+                            {({isSubmitting}) => (
                                 <Form className="col-md-4">
 
-                                    <div className="form-group">
-                                        <label htmlFor="firstName" className="form-label">First Name</label>
-                                        <Field type="text" name="firstName" className="form-control border-2 shadow-none"/>
-                                        <ErrorMessage name="firstName" component="div" />
+                                    <TextInput
+                                        label="First Name"
+                                        name="firstName"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    <TextInput
+                                        label="Last Name"
+                                        name="lastName"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    <TextInput
+                                        label="Title"
+                                        name="title"
+                                        type="text"
+                                        placeholder=""
+                                    />
 
-                                    </div>
                                     <div className="form-group">
-                                        <label htmlFor="lastName" className="form-label">Last Name</label>
-                                        <Field type="text" name="lastName" className="form-control border-2 shadow-none"/>
-                                        <ErrorMessage name="lastName" component="div" />
-
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="title" className="form-label">Title</label>
-                                        <Field type="text" name="title" className="form-control border-2 shadow-none"/>
-                                        <ErrorMessage name="title" component="div" />
-
-                                    </div>
-                                    <div className="form-group">
-                                        <button disabled={isSubmitting} type="submit" className="btn btn-warning border-2 shadow-none">Save</button>
+                                        <button disabled={isSubmitting} type="submit"
+                                                className="btn btn-warning border-2 shadow-none">Save
+                                        </button>
                                     </div>
                                 </Form>
                             )}
                         </Formik>
                     </div>
                     <div className="page-section reports-control">
-                        <div className="title border-bottom">{membersName.toUpperCase() + " REPORTS TO THE FOLLOWING LEADERS:"}</div>
+                        <div
+                            className="title border-bottom">{membersName.toUpperCase() + " REPORTS TO THE FOLLOWING LEADERS:"}</div>
                         <div className="team">
                             {teamMemberStore.map((item, index) => (
                                 <a key={index} href="#" className="me-2 btn btn-dark shadow-none">{item}</a>
                             ))}
                         </div>
-                        <a onClick={(e)=>onClickEdit(e)} className="btn btn-outline-dark border-2 shadow-none" data-bs-toggle="modal" role="button">Edit Leader(s)</a>
+                        <a onClick={(e) => onClickEdit(e)} className="btn btn-outline-dark border-2 shadow-none"
+                           data-bs-toggle="modal" role="button">Edit Leader(s)</a>
                     </div>
                     <div className="page-section reports-control">
-                        <div className="title border-bottom">{"THE FOLLOWING TEAM MEMBERS REPORT TO "+ membersName.toUpperCase() +":"}</div>
+                        <div
+                            className="title border-bottom">{"THE FOLLOWING TEAM MEMBERS REPORT TO " + membersName.toUpperCase() + ":"}</div>
                         <div className="team">
                             {teamMemberStore.map((item, index) => (
                                 <a key={index} href="#" className="me-2 btn btn-dark shadow-none">{item}</a>
                             ))}
                         </div>
-                        <a onClick={(e)=>onClickEdit(e)} className="btn btn-outline-dark border-2 shadow-none" data-bs-toggle="modal"
+                        <a onClick={(e) => onClickEdit(e)} className="btn btn-outline-dark border-2 shadow-none"
+                           data-bs-toggle="modal"
                            role="button">Edit Member(s)</a>
                     </div>
                     <div className="page-section reports-control">
-                        <div className="title border-bottom">{membersName.toUpperCase()+"'S INVITE LINK"}</div>
-                        <p>{"Share the following link to invite team members on "+ membersName +"'s behalf."}</p>
+                        <div className="title border-bottom">{membersName.toUpperCase() + "'S INVITE LINK"}</div>
+                        <p>{"Share the following link to invite team members on " + membersName + "'s behalf."}</p>
                         <form className="text-center">
                                 <textarea disabled className="text-area col-md-6"
                                           defaultValue="https://www.figma.com/file/xs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJBxs4FaSfzPijgSJ5R3aqrJB/Weekly-Report?node-id=5%3A20"
-                                          />
+                                />
                             <div className="p-2">
                                 <button type="button" className="btn btn-warning shadow-none">Copy
                                     Link
