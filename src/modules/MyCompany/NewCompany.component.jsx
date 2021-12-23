@@ -20,7 +20,6 @@ export const NewCompany = ({onButton}) => {
         }
 
         const responseCompany = await api.post(`companies`, bodyCompany)
-        console.log(responseCompany)
 
         const bodyTeamMember = {
             FirstName: values.firstName,
