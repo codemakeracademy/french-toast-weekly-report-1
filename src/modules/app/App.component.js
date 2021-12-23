@@ -24,7 +24,6 @@ export function App() {
         try {
             (user && user.sub && appService.getUserBySub(user.sub)
                 .then(res => {
-                    // res ? console.log("true") : console.log(false);
                     res ? setHasCompany(true) : setHasCompany(false);
                 }))
 

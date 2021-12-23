@@ -11,20 +11,43 @@ import {Context} from "../app/App.component";
 import {getMemberInitials, getMembersFullName, getMembersName} from "../common/function";
 
 
-export const EditMemberInformation = () => {
+export const EditMemberInformation = ({user}) => {
+    const {currentUser, setUpdateMember, selectedMember} = useContext(Context);
 
     const [edit, useEdit] = useState(false)
-    const {currentUser, setUpdateMember, selectedMember} = useContext(Context);
+    const [showForm, setShowForm] = useState(false)
     const [member, setMember] = useState(selectedMember || currentUser)
 
     useEffect(() => {
-        if (selectedMember && currentUser.teamMemberId !== selectedMember.teamMemberId) {
-            setMember(selectedMember)
-            useEdit(true)
-        } else {
-            setMember(currentUser)
+        async function fetchData() {
+            try {
+                await user && setMember(currentUser) && useEdit(false)
+            } catch (error) {
+                console.error(error)
+            }
         }
-    }, [undefined,member]);
+        fetchData()
+    });
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                selectedMember
+                    ? await setMember(selectedMember)
+
+                    : await setMember(currentUser)
+                if (selectedMember && currentUser.teamMemberId !== selectedMember.teamMemberId) {
+                    useEdit(true)
+                }
+                setShowForm(true)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchData()
+    }, [currentUser, selectedMember]);
+
+
 
     const memberInitials = getMemberInitials(member)
     const membersFullName = getMembersFullName(member)
@@ -37,11 +60,12 @@ export const EditMemberInformation = () => {
         setCurrentTitle(e.target.text)
     }
 
-    const onSubmit = (values, {setSubmitting}) => {
+    const onSubmit = (values, {setSubmitting, resetForm}) => {
         setTimeout(() => {
             changeMemberInfo(currentUser.teamMemberId, values)
             setUpdateMember([values.firstName, values.lastName, values.title])
             setSubmitting(false);
+            resetForm()
         }, 400);
     }
     return (
@@ -64,7 +88,7 @@ export const EditMemberInformation = () => {
                     <div className="page-section">
                         <div className="title border-bottom">BASIC PROFILE INFORMATION</div>
 
-                        <Formik
+                        {showForm && <Formik
                             initialValues={{
                                 firstName: member.firstName,
                                 lastName: member.lastName,
@@ -114,7 +138,7 @@ export const EditMemberInformation = () => {
                                     </div>
                                 </Form>
                             )}
-                        </Formik>
+                        </Formik>}
                     </div>
                     <div className="page-section reports-control">
                         <div
