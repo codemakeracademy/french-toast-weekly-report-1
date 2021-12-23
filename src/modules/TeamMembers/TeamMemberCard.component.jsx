@@ -1,10 +1,8 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {NavLink} from "react-router-dom";
-import {Context} from "../app/App.component";
 
 export const TeamMemberCard = ({item}) => {
-
-    const {setSelectedMember} = useContext(Context);
+    const link = "/edit-member-information/" + item.teamMemberId
 
     const fullName = item.firstName + " " + item.lastName
     const initials = (item.firstName.charAt(0) + item.lastName.charAt(0)).toUpperCase()
@@ -17,8 +15,7 @@ export const TeamMemberCard = ({item}) => {
                 <div className="m-3">{fullName}</div>
             </div>
             <NavLink onClick={() => {
-                setSelectedMember(item)
-            } } className="text-decoration-none text-reset" to="/edit-member-information">
+            } } className="text-decoration-none text-reset" to={link}>
                 Edit
             </NavLink>
         </li>
