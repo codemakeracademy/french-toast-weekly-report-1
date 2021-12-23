@@ -22,11 +22,11 @@ export const TeamReports = () => {
     }
     const [reports, setReports] = useState([]);
     async function getReports(){
-        const companyId = 0, teamMemberId = 5; // teamMemberId - TEMP
+        const teamMemberId = 5; // teamMemberId - TEMP
         return [
-            await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
+            await api.get(`companies/0/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, {validateStatus: false})
                 .then((response)=> response.data),
-            await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, {validateStatus: false})
+            await api.get(`companies/0/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, {validateStatus: false})
                 .then((response)=> response.data)
         ];
     }
@@ -88,22 +88,33 @@ export const TeamReports = () => {
                     <div className="mt-3 short-line mx-auto"> </div>
                 </div>
             </div>
-            <div className="w-75 mb-2 m-auto d-grid gap-2 d-flex justify-content-end">
-                <button className="btn btn-dark text-light" id="allexpanded" onClick={expandAll}>Expand All</button>
-            </div>
-            <div className="row w-75 m-auto p-3 pe-4 bg-white mb-1">
-                <div className="col-7"> </div>
-                <div className="col-1 p-0 ms-2">Morale</div>
-                <div className="col-1 p-0 ms-2">Stress</div>
-                <div className="col-1 p-0">Workload</div>
-            </div>
-            <div className="accordion w-75 m-auto mb-5" id="myAccordion">
-                {reports[activePeriod] ? reports[activePeriod].map((item, index)=>{
-                    return(
-                        <MyReportsCard reportData={item} key={index}/>
-                    )
-                }) : <div className="w-100 text-center bg-white mt-2 p-3">There are no members which send reports to you</div>}
-            </div>
+            {activePeriod != 2 && (
+                <>
+                    <div className="w-75 mb-2 m-auto d-grid gap-2 d-flex justify-content-end">
+                    <button className="btn btn-dark text-light" id="allexpanded" onClick={expandAll}>Expand All</button>
+                    </div>
+                    <div className="row w-75 m-auto p-3 pe-4 bg-white mb-1">
+                        <div className="col-7"> </div>
+                        <div className="col-1 p-0 ms-2">Morale</div>
+                        <div className="col-1 p-0 ms-2">Stress</div>
+                        <div className="col-1 p-0">Workload</div>
+                    </div>
+                    <div className="accordion w-75 m-auto mb-5" id="myAccordion">
+                        {reports[activePeriod] ? reports[activePeriod].map((item, index)=>{
+                            return(
+                                <MyReportsCard reportData={item} key={index}/>
+                            )
+                        }) : <div className="w-100 text-center bg-white mt-2 p-3">There are no members which send reports to you</div>}
+                    </div>
+                </>
+            )}
+            {activePeriod == 2 && (
+                <>
+                    {// OLDER REPORTS
+                    }
+                </>
+            )}
+            
         </>
     )
 }
