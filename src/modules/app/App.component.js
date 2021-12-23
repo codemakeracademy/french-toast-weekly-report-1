@@ -5,52 +5,60 @@ import WelcomePage from "../WelcomePage/WelcomePage";
 import {InvitePage} from "../InvitePage/InvitePage.component";
 import {NewCompany} from "../MyCompany/NewCompany.component";
 import * as appService from "./App.service";
+import {newTeamMember} from "../InvitePage/newTeamMember";
+import {Loader} from "../common/Loader/Loader.component";
 
 export const Context = React.createContext(null)
 
 export function App() {
     const [currentUser, setCurrentUser] = useState()
-    const {isAuthenticated, user} = useAuth0();
+    const {isAuthenticated, user, isLoading} = useAuth0();
     const currentLocation = window.location;
     const [hasCompany, setHasCompany] = useState(false)
     const [createNew, setCreateNew] = useState()
     const [updateCompany, setUpdateCompany] = useState()
     const [updateMember, setUpdateMember] = useState()
+    const [initialLoading, setInitialLoading] = useState(true)
 
     const [selectedMember, setSelectedMember] = useState()
 
-
     useEffect(() => {
-        try {
-            (user && user.sub && appService.getUserBySub(user.sub)
-                .then(res => {
-                    res ? setHasCompany(true) : setHasCompany(false);
-                }))
-
-        } catch(error) {
-            console.error(error)
-        }
-
-    }, [user, createNew])
-
-    useEffect(() => {
-        async function fetchData() {
+        if (user && user.sub) {
             try {
-                const data = await (user && user.sub && appService.getUser(user.sub))
-                setCurrentUser(data)
+                appService.getUserBySub(user.sub)
+                    .then(res => {
+                        res ? setHasCompany(true) : setHasCompany(false);
+                    })
             } catch (error) {
                 console.error(error)
             }
         }
-        fetchData()
+
+    }, [user, createNew])
+
+    useEffect(async () => {
+        if (user && user.sub) {
+            try {
+                const data = await appService.getUser(user.sub)
+                setCurrentUser(data)
+                setInitialLoading(false)
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }, [user, updateCompany, updateMember]);
 
+    if (initialLoading || isLoading) {
+        return (
+            <Loader/>
+        )
+    }
 
     return (
         <Context.Provider value={{currentUser, setUpdateMember, setUpdateCompany, selectedMember, setSelectedMember}}>
             {currentLocation.pathname === "/invite"
                 ? (isAuthenticated
-                    ? <Article />
+                    ? newTeamMember() && <Article/>
                     : <InvitePage/>)
                 : (isAuthenticated && hasCompany)
                     ? <Article/>
@@ -61,6 +69,3 @@ export function App() {
         </Context.Provider>
     );
 }
-
-
-export default App;

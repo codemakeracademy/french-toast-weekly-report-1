@@ -5,21 +5,17 @@ import {Header} from "../common/Header/Header.component";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {changeNameCompany} from "./MyCompany.service";
 import {Context} from "../app/App.component";
-import {getJoinDate} from "../common/function";
-
+import {getJoinDate} from "../common/util/function";
 
 export const MyCompany = () => {
 
     const {currentUser, setUpdateCompany} = useContext(Context);
 
-
     const onSubmit = (values, {setSubmitting, resetForm}) => {
-        setTimeout(() => {
             changeNameCompany(currentUser.companyId, values.companyName)
             setUpdateCompany(values.companyName)
             setSubmitting(false);
             resetForm()
-        }, 400);
     }
     const dateTitle = getJoinDate(currentUser.joinDate)
 
@@ -42,8 +38,6 @@ export const MyCompany = () => {
                     </div>
                     <div className="page-section">
                         <div className="title border-bottom">RENAME {currentUser.companyName.toUpperCase()}</div>
-
-
                         <Formik
                             initialValues={{companyName: ''}}
                             onSubmit={onSubmit}

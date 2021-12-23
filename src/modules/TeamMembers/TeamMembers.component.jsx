@@ -4,7 +4,7 @@ import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {getTeamMembers} from "./TemMembers.service";
 import {Context} from "../app/App.component";
 import {TeamMemberCard} from "./TeamMemberCard.component";
-import {getJoinDate} from "../common/function";
+import {getJoinDate} from "../common/util/function";
 
 
 export const TeamMembers = () => {

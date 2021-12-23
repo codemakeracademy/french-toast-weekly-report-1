@@ -1,67 +1,38 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Header } from "../common/Header/Header.component";
-import { teamMemberStore } from "../../store/teamMemberStore";
-import { EditModal } from "./EditModal.component";
-import { HelmetComponent } from "../common/Helmet/Helmet.component";
-import { Form, Formik } from "formik";
-import { TextInput } from "../common/Formik/textInput.component";
+import React, {useContext, useState} from "react";
+import {Header} from "../common/Header/Header.component";
+import {teamMemberStore} from "../../store/teamMemberStore";
+import {EditModal} from "./EditModal.component";
+import {HelmetComponent} from "../common/Helmet/Helmet.component";
+import {Form, Formik} from "formik";
+import {TextInput} from "../common/Formik/textInput.component";
 import * as Yup from "yup";
-import { changeMemberInfo } from "./EditMemberInformation.service";
-import { Context } from "../app/App.component";
-import { getMemberInitials, getMembersFullName, getMembersName } from "../common/function";
+import {changeMemberInfo} from "./EditMemberInformation.service";
+import {getMemberInitials, getMembersFullName, getMembersName} from "../common/util/function";
+import {Context} from "../app/App.component";
 
-export const EditMemberInformation = ({ user }) => {
-    const { currentUser, setUpdateMember, selectedMember } = useContext(Context);
 
-    const [edit, useEdit] = useState(false);
-    const [showForm, setShowForm] = useState(false);
-    const [member, setMember] = useState(selectedMember || currentUser);
+export const EditMemberInformation = ({member, edit}) => {
+    const {setUpdateMember} = useContext(Context);
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                (await user) && setMember(currentUser) && useEdit(false);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        fetchData();
-    });
+    const memberInitials = getMemberInitials(member)
+    const membersFullName = getMembersFullName(member)
+    const membersName = getMembersName(member)
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                selectedMember ? await setMember(selectedMember) : await setMember(currentUser);
-                if (selectedMember && currentUser.teamMemberId !== selectedMember.teamMemberId) {
-                    useEdit(true);
-                }
-                setShowForm(true);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        fetchData();
-    }, [currentUser, selectedMember]);
-
-    const memberInitials = getMemberInitials(member);
-    const membersFullName = getMembersFullName(member);
-    const membersName = getMembersName(member);
-    const [showEdit, setShowEdit] = useState(false);
-    const [currentTitle, setCurrentTitle] = useState("");
+    const [showEdit, setShowEdit] = useState(false)
+    const [currentTitle, setCurrentTitle] = useState("")
 
     const onClickEdit = (e) => {
         setShowEdit(true);
         setCurrentTitle(e.target.text);
     };
 
-    const onSubmit = (values, { setSubmitting, resetForm }) => {
-        setTimeout(() => {
-            changeMemberInfo(values);
-            setUpdateMember([values.firstName, values.lastName, values.title]);
+    const onSubmit = (values, {setSubmitting, resetForm}) => {
+            changeMemberInfo(member.companyId, values)
+            console.log(values)
+            setUpdateMember([values.firstName, values.lastName, values.title])
             setSubmitting(false);
-            resetForm();
-        }, 400);
-    };
+            resetForm()
+    }
     return (
         <>
             <HelmetComponent title="Edit Member Information" />
@@ -81,37 +52,58 @@ export const EditMemberInformation = ({ user }) => {
                     <div className="page-section">
                         <div className="title border-bottom">BASIC PROFILE INFORMATION</div>
 
-                        {showForm && (
-                            <Formik
-                                initialValues={{
-                                    FirstName: member.firstName,
-                                    LastName: member.lastName,
-                                    Title: member.title,
-                                    CompanyId: selectedMember ? selectedMember.companyId : currentUser.companyId,
-                                    TeamMemberId: selectedMember ? selectedMember.teamMemberId : currentUser.teamMemberId,
-                                }}
-                                validationSchema={Yup.object({
-                                    FirstName: Yup.string().max(20, "Must be 20 characters or less"),
-                                    LastName: Yup.string().max(20, "Must be 20 characters or less"),
-                                    Title: Yup.string().max(100, "Must be 100 characters or less"),
-                                })}
-                                onSubmit={onSubmit}
-                            >
-                                {({ isSubmitting }) => (
-                                    <Form className="col-md-4">
-                                        <TextInput disabled={edit} label="First Name" name="FirstName" type="text" placeholder="" />
-                                        <TextInput disabled={edit} label="Last Name" name="LastName" type="text" placeholder="" />
-                                        <TextInput disabled={edit} label="Title" name="Title" type="text" placeholder="" />
+                        <Formik
+                            initialValues={{
+                                firstName: member.firstName,
+                                lastName: member.lastName,
+                                title: member.title,
+                                teamMemberId: member.teamMemberId
+                            }}
 
-                                        <div className="form-group">
-                                            <button disabled={edit || isSubmitting} type="submit" className="btn btn-warning border-2 shadow-none">
-                                                Save
-                                            </button>
-                                        </div>
-                                    </Form>
-                                )}
-                            </Formik>
-                        )}
+                            validationSchema={Yup.object({
+                                firstName: Yup.string()
+                                    .max(20, 'Must be 20 characters or less'),
+                                lastName: Yup.string()
+                                    .max(20, 'Must be 20 characters or less'),
+                                title: Yup.string()
+                                    .max(100, 'Must be 100 characters or less'),
+                            })}
+
+                            onSubmit={onSubmit}
+                        >
+                            {({isSubmitting}) => (
+                                <Form className="col-md-4">
+
+                                    <TextInput
+                                        disabled={edit}
+                                        label="First Name"
+                                        name="firstName"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    <TextInput
+                                        disabled={edit}
+                                        label="Last Name"
+                                        name="lastName"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    <TextInput
+                                        disabled={edit}
+                                        label="Title"
+                                        name="title"
+                                        type="text"
+                                        placeholder=""
+                                    />
+
+                                    <div className="form-group">
+                                        <button disabled={edit || isSubmitting} type="submit"
+                                                className="btn btn-warning border-2 shadow-none">Save
+                                        </button>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </div>
                     <div className="page-section reports-control">
                         <div className="title border-bottom">{membersName.toUpperCase() + " REPORTS TO THE FOLLOWING LEADERS:"}</div>

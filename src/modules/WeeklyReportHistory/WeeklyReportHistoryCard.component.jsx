@@ -4,7 +4,6 @@ import React from "react";
 import { smilesStore } from "../../store/smilesStore";
 
 export const WeeklyReportHistoryCard = ({ cardName, id, reportHistory, filter }) => {
-    // console.log("reportHistory: ", reportHistory[0]);
     let values;
     let userSmiles = [];
     let userAverage = [];
@@ -19,7 +18,6 @@ export const WeeklyReportHistoryCard = ({ cardName, id, reportHistory, filter })
                 userSmiles.push(smilesStore[Math.round(sum / value.length)]);
             });
         } catch {}
-        // console.log("userAverage: ", userAverage);
     } else if (filter === 1) {
         try {
             values = data.get(id).teamMemberReports;
@@ -44,8 +42,8 @@ export const WeeklyReportHistoryCard = ({ cardName, id, reportHistory, filter })
     }
 
     return (
-        <div className="card card-header d-flex flex-row align-items-center justify-content-between pt-3 pb-3 pr-0 mb-2">
-            <div className="card-name">{cardName}</div>
+        <div className="card card-header d-flex flex-row text-start justify-content-between pt-3 pb-3 pr-0 mb-2">
+            <div className="card-name mt-1">{cardName}</div>
             <div className="smiles d-flex align-items-center justify-content-between">
                 {userSmiles.map((item, index) => (
                     <img key={index} className="smile mr-3" src={item.imageSmall} alt={item.alt} />

@@ -7,8 +7,8 @@ import { api } from "../api/api.service";
 export const MyReports = () => {
     const [reports, setReports] = useState(null);
     async function getReports(){
-        const companyId = 1, teamMemberId = 3; // useless company id. teamMemberId - TEMP
-        return await api.get(`https://localhost:5001/api/companies/${companyId}/team-members/${teamMemberId}/reports`, {validateStatus: false})
+        const companyId = 0, teamMemberId = 3; // teamMemberId - TEMP
+        return await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports`, {validateStatus: false})
             .then((response)=> response.data);
     }
     useEffect(() => {
