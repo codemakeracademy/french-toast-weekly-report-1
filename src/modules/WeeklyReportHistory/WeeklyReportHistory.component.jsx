@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Header } from "../common/Header/Header.component";
 import { WeekAgo } from "./WeekAgo.component";
 import { WeeksHeader } from "./WeeksHeader.component";
@@ -13,6 +13,7 @@ import {MyReportsCard} from "../MyReports/MyReports.Card.component";
 import * as Dates from "../common/Utiles/DateUtiles";
 import getWeeklyReportHistory from "./WeeklyReport.service";
 import { api } from "../api/api.service";
+import { Context } from "../app/App.component";
 
 export const WeeklyReportHistory = () => {
     const [activeTeam, setActiveTeam] = useState(1);
@@ -83,6 +84,8 @@ export const WeeklyReportHistory = () => {
         }
         fetchData()
     },[]);
+
+    const {currentUser, selectedMember} = useContext(Context);
 
     return (
         <>
