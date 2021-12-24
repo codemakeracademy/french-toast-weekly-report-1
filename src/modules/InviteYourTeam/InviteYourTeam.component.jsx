@@ -20,7 +20,7 @@ export const InviteYourTeam = () => {
 
     const onSubmit = async (values, {setSubmitting, resetForm}) => {
         setSuccess(true);
-        await setInviteLink("http://localhost:3000/invite?" + (createLink(values)))
+        await setInviteLink("https://weekly-report-01.digitalocean.ankocorp.com/invite?" + (createLink(values)))
         setSubmitting(false);
         resetForm()
     }
