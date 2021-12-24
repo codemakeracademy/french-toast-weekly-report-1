@@ -42,8 +42,8 @@ export const TeamReports = () => {
     async function getReports() {
         const companyId = currentUser.companyId;
         const teamMemberId = currentUser.teamMemberId;
-        return [await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, { validateStatus: false }).then((response) => response.data), 
-                await api.get(`companies/${companyId}/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, { validateStatus: false }).then((response) => response.data)];
+        return [await api.get(`companies/0/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstdayPrev)}/${Dates.DateToString(lastdayPrev)}`, { validateStatus: false }).then((response) => response.data), 
+                await api.get(`companies/0/team-members/${teamMemberId}/reports/to/${Dates.DateToString(firstday)}/${Dates.DateToString(lastday)}`, { validateStatus: false }).then((response) => response.data)];
     }
 
     async function getTeamMembers() {
