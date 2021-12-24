@@ -2,20 +2,21 @@ import {NavLink} from "react-router-dom";
 import React, {useContext} from "react";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {Header} from "../common/Header/Header.component";
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {Form, Formik} from "formik";
 import {changeNameCompany} from "./MyCompany.service";
 import {Context} from "../app/App.component";
-import {getJoinDate} from "../common/util/function";
+import {getJoinDate} from "../common/Utiles/function";
+import {TextInput} from "../common/Formik/textInput.component";
 
 export const MyCompany = () => {
 
     const {currentUser, setUpdateCompany} = useContext(Context);
 
-    const onSubmit = (values, {setSubmitting, resetForm}) => {
-            changeNameCompany(currentUser.companyId, values.companyName, currentUser.joinDate);
-            setUpdateCompany(values.companyName);
-            setSubmitting(false);
-            resetForm();
+    const onSubmit = async (values, {setSubmitting, resetForm}) => {
+        await changeNameCompany(currentUser.companyId, values.companyName)
+        setUpdateCompany(true)
+        setSubmitting(false);
+        resetForm()
     }
     const dateTitle = getJoinDate(currentUser.joinDate)
 
@@ -44,14 +45,12 @@ export const MyCompany = () => {
                         >
                             {({isSubmitting}) => (
                                 <Form className="col-md-4">
-                                    <div className="form-group">
-                                        <label htmlFor="companyName" className="form-label">
-                                            Change company name
-                                        </label>
-                                        <Field className="form-control border-2 shadow-none" type="text"
-                                               name="companyName"/>
-                                    </div>
-                                    <ErrorMessage name="companyName" component="div"/>
+                                    <TextInput
+                                        label="Change company name"
+                                        name="companyName"
+                                        type="text"
+                                        placeholder=""
+                                    />
                                     <div className="form-group">
                                         <button disabled={isSubmitting} type="submit"
                                                 className="btn btn-outline-dark border-2 shadow-none">

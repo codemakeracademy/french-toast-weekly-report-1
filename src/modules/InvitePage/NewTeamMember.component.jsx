@@ -1,46 +1,52 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Success} from "./Succsess.component";
-import {Header} from "../common/Header/Header.component";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
+import {Header} from "../common/Header/Header.component";
+import React, {useContext} from "react";
 import {Form, Formik} from "formik";
+import {linkToObject} from "../common/Utiles/function";
+import {Loader} from "../common/Loader/Loader.component";
+import {useAuth0} from "@auth0/auth0-react";
+import {createNewTeamMember} from "./NewTeamMember.service";
 import {Context} from "../app/App.component";
-import {createLink} from "../common/Utiles/function";
+import {useHistory} from "react-router-dom";
 import {TextInput} from "../common/Formik/textInput.component";
 
-export const InviteYourTeam = () => {
-    const {currentUser} = useContext(Context);
-    const [success, setSuccess] = useState(false);
-    const [inviteLink, setInviteLink] = useState(null)
+export const NewTeamMember = () => {
+    let history = useHistory()
+    const {setCreateNewMember} = useContext(Context);
+    const {user} = useAuth0();
+    const newMember = sessionStorage.getItem("href")
+    const obj = linkToObject(newMember)
 
-    useEffect(async () => {
-        if (inviteLink) {
-            alert(inviteLink)
-        }
-    }, [inviteLink]);
-
-    const onSubmit = async (values, {setSubmitting, resetForm}) => {
-        setSuccess(true);
-        await setInviteLink("https://weekly-report-01.digitalocean.ankocorp.com/invite?" + (createLink(values)))
+    const onSubmit = async (values, {setSubmitting}) => {
+        await createNewTeamMember(values, obj.teamMemberTo)
+        await setCreateNewMember(true)
+        history.push("/")
         setSubmitting(false);
-        resetForm()
     }
+
+    if (!obj || !user) {
+        return <Loader/>
+    }
+
     return (
-        <>
-            <HelmetComponent title="Invite Your Team"/>
+        <div>
+            <HelmetComponent title="Weekly Team Report"/>
             <Header>
-                <h1>Invite Your Team</h1>
+                <div>
+                    <h1 className="header-title">Weekly Team Report</h1>
+                </div>
             </Header>
             <div className="row justify-content-md-center">
                 <div className="col-md-6">
-                    {success && <Success/>}
                     <div className="row mt-5">
                         <Formik
                             initialValues={{
-                                FirstName: '',
-                                LastName: '',
-                                Mail: '',
-                                companyId: currentUser.companyId,
-                                teamMemberTo: currentUser.teamMemberId
+                                FirstName: obj.FirstName,
+                                LastName: obj.LastName,
+                                Title: '',
+                                Mail: user.email,
+                                Subject: user.sub,
+                                CompanyId: obj.companyId
                             }}
                             onSubmit={onSubmit}
                         >
@@ -48,8 +54,6 @@ export const InviteYourTeam = () => {
                                 <Form>
                                     <div className="card">
                                         <div className="card-body">
-                                            <h6 className="card-title">Enter the team member you'd like to invite</h6>
-                                            <p>Don't worry! You'll be able to add more team members later.</p>
                                             <TextInput
                                                 label="First Name"
                                                 name="FirstName"
@@ -63,9 +67,9 @@ export const InviteYourTeam = () => {
                                                 placeholder=""
                                             />
                                             <TextInput
-                                                label="Email"
-                                                name="Mail"
-                                                type="email"
+                                                label="Title"
+                                                name="Title"
+                                                type="text"
                                                 placeholder=""
                                             />
                                             <div className="form-group">
@@ -73,7 +77,7 @@ export const InviteYourTeam = () => {
                                                     className="btn btn-warning shadow-none"
                                                     type="submit"
                                                     disabled={isSubmitting}
-                                                >Invite
+                                                >Continue
                                                 </button>
                                             </div>
                                         </div>
@@ -84,6 +88,6 @@ export const InviteYourTeam = () => {
                     </div>
                 </div>
             </div>
-        </>
-    );
-};
+        </div>
+    )
+}

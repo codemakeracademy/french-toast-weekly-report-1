@@ -4,29 +4,21 @@ import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {getTeamMembers} from "./TemMembers.service";
 import {Context} from "../app/App.component";
 import {TeamMemberCard} from "./TeamMemberCard.component";
-import {getJoinDate} from "../common/util/function";
+import {getJoinDate} from "../common/Utiles/function";
 
 
 export const TeamMembers = () => {
     const {currentUser} = useContext(Context);
-
-
     const [teamMembers, setTeamMembers] = useState(null);
-
     const dateTitle = getJoinDate(currentUser.joinDate)
 
-    useEffect(() => {
-        async function fetchData() {
+    useEffect(async () => {
             try {
                 const teamMemberResponse = await getTeamMembers(currentUser.companyId)
                 setTeamMembers(teamMemberResponse)
-
             } catch (error) {
                 console.error(error)
             }
-        }
-        fetchData()
-
     }, [])
     return (
         <>
