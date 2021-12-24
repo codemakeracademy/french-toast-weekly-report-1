@@ -19,6 +19,7 @@ export function App() {
     const [updateCompany, setUpdateCompany] = useState()
     const [updateMember, setUpdateMember] = useState()
 
+
     useEffect(() => {
         if (user && user.sub) {
             try {
@@ -37,9 +38,8 @@ export function App() {
     useEffect(async () => {
         if (user && user.sub) {
             try {
-                const data = await appService.getUser(user.sub)
-                await setCurrentUser(data)
-
+                const data = await appService.getUser(user.sub);
+                await setCurrentUser(data);
             } catch (error) {
                 console.error(error)
             }
