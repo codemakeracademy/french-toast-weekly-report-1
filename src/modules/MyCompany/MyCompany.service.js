@@ -1,7 +1,9 @@
 import { api } from "../api/api.service";
 
-export const changeNameCompany = async (companyId, name) => {
+export const changeNameCompany = async (companyId, name, joinDate) => {
     await api.put(`companies/`, {
         "companyId": companyId,
-        "companyName": name})
+        "companyName": name,
+        "joinDate": joinDate
+    })
 };

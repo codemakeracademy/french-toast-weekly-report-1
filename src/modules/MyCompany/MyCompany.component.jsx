@@ -12,10 +12,10 @@ export const MyCompany = () => {
     const {currentUser, setUpdateCompany} = useContext(Context);
 
     const onSubmit = (values, {setSubmitting, resetForm}) => {
-            changeNameCompany(currentUser.companyId, values.companyName)
-            setUpdateCompany(values.companyName)
+            changeNameCompany(currentUser.companyId, values.companyName, currentUser.joinDate);
+            setUpdateCompany(values.companyName);
             setSubmitting(false);
-            resetForm()
+            resetForm();
     }
     const dateTitle = getJoinDate(currentUser.joinDate)
 
