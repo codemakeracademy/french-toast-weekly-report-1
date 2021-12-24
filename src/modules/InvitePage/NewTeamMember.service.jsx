@@ -6,8 +6,8 @@ export const createNewTeamMember = async (values, teamMemberTo) => {
 
     const body = {
         "teamMemberFrom": responseTeamMember.data.teamMemberId,
-        "teamMemberTo": teamMemberTo}
+        "teamMemberTo": teamMemberTo
+    }
 
-    await api.post(`report-from-to`, body
-        )
+    await api.post(`report-from-to`, body)
 }

@@ -1,33 +1,34 @@
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 import {Header} from "../common/Header/Header.component";
 import React, {useContext} from "react";
-import {ErrorMessage, Field, Form, Formik} from "formik";
-import {linkToObject} from "../common/util/function";
+import {Form, Formik} from "formik";
+import {linkToObject} from "../common/Utiles/function";
 import {Loader} from "../common/Loader/Loader.component";
 import {useAuth0} from "@auth0/auth0-react";
 import {createNewTeamMember} from "./NewTeamMember.service";
 import {Context} from "../app/App.component";
+import {useHistory} from "react-router-dom";
+import {TextInput} from "../common/Formik/textInput.component";
 
 export const NewTeamMember = () => {
+    let history = useHistory()
     const {setCreateNewMember} = useContext(Context);
-
     const {user} = useAuth0();
     const newMember = sessionStorage.getItem("href")
     const obj = linkToObject(newMember)
 
-
     const onSubmit = async (values, {setSubmitting}) => {
         await createNewTeamMember(values, obj.teamMemberTo)
         await setCreateNewMember(true)
+        history.push("/")
         setSubmitting(false);
     }
 
-    if(!obj || !user) {
+    if (!obj || !user) {
         return <Loader/>
     }
 
-
-    return(
+    return (
         <div>
             <HelmetComponent title="Weekly Team Report"/>
             <Header>
@@ -53,30 +54,24 @@ export const NewTeamMember = () => {
                                 <Form>
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="form-group">
-                                                <label htmlFor="FirstName" className="form-label">
-                                                    First Name
-                                                </label>
-                                                <Field className="form-control border-2 shadow-none" type="text"
-                                                       name="FirstName"/>
-                                                <ErrorMessage name="FirstName" component="div"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="LastName" className="form-label">
-                                                    Last Name
-                                                </label>
-                                                <Field className="form-control border-2 shadow-none" type="text"
-                                                       name="LastName"/>
-                                                <ErrorMessage name="LastName" component="div"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="Title" className="form-label">
-                                                    Title
-                                                </label>
-                                                <Field className="form-control border-2 shadow-none" type="text"
-                                                       name="Title"/>
-                                                <ErrorMessage name="Title" component="div"/>
-                                            </div>
+                                            <TextInput
+                                                label="First Name"
+                                                name="FirstName"
+                                                type="text"
+                                                placeholder=""
+                                            />
+                                            <TextInput
+                                                label="Last Name"
+                                                name="LastName"
+                                                type="text"
+                                                placeholder=""
+                                            />
+                                            <TextInput
+                                                label="Title"
+                                                name="Title"
+                                                type="text"
+                                                placeholder=""
+                                            />
                                             <div className="form-group">
                                                 <button
                                                     className="btn btn-warning shadow-none"
@@ -93,8 +88,6 @@ export const NewTeamMember = () => {
                     </div>
                 </div>
             </div>
-
-
         </div>
     )
 }

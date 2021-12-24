@@ -15,7 +15,7 @@ export const TeamMemberCard = ({item}) => {
                 <div className="m-3">{fullName}</div>
             </div>
             <NavLink onClick={() => {
-            } } className="text-decoration-none text-reset" to={link}>
+            }} className="text-decoration-none text-reset" to={link}>
                 Edit
             </NavLink>
         </li>

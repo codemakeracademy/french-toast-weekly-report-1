@@ -2,28 +2,27 @@ import React, {useContext, useEffect, useState} from "react";
 import {Success} from "./Succsess.component";
 import {Header} from "../common/Header/Header.component";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {Form, Formik} from "formik";
 import {Context} from "../app/App.component";
-import {createLink} from "../common/util/function";
+import {createLink} from "../common/Utiles/function";
+import {TextInput} from "../common/Formik/textInput.component";
 
 export const InviteYourTeam = () => {
     const {currentUser} = useContext(Context);
-
     const [success, setSuccess] = useState(false);
     const [inviteLink, setInviteLink] = useState(null)
 
     useEffect(async () => {
-        if(inviteLink) {
-            console.log(inviteLink)
+        if (inviteLink) {
+            alert(inviteLink)
         }
     }, [inviteLink]);
 
-
-
-    const onSubmit = async (values, {setSubmitting}) => {
+    const onSubmit = async (values, {setSubmitting, resetForm}) => {
         setSuccess(true);
         await setInviteLink("http://localhost:3000/invite?" + (createLink(values)))
         setSubmitting(false);
+        resetForm()
     }
     return (
         <>
@@ -51,30 +50,24 @@ export const InviteYourTeam = () => {
                                         <div className="card-body">
                                             <h6 className="card-title">Enter the team member you'd like to invite</h6>
                                             <p>Don't worry! You'll be able to add more team members later.</p>
-                                            <div className="form-group">
-                                                <label htmlFor="FirstName" className="form-label">
-                                                    First Name
-                                                </label>
-                                                <Field className="form-control border-2 shadow-none" type="text"
-                                                       name="FirstName"/>
-                                                <ErrorMessage name="FirstName" component="div"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="LastName" className="form-label">
-                                                    Last Name
-                                                </label>
-                                                <Field className="form-control border-2 shadow-none" type="text"
-                                                       name="LastName"/>
-                                                <ErrorMessage name="LastName" component="div"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="mail" className="form-label">
-                                                    Email
-                                                </label>
-                                                <Field className="form-control border-2 shadow-none" type="email"
-                                                       name="Mail"/>
-                                                <ErrorMessage name="Mail" component="div"/>
-                                            </div>
+                                            <TextInput
+                                                label="First Name"
+                                                name="FirstName"
+                                                type="text"
+                                                placeholder=""
+                                            />
+                                            <TextInput
+                                                label="Last Name"
+                                                name="LastName"
+                                                type="text"
+                                                placeholder=""
+                                            />
+                                            <TextInput
+                                                label="Email"
+                                                name="Mail"
+                                                type="email"
+                                                placeholder=""
+                                            />
                                             <div className="form-group">
                                                 <button
                                                     className="btn btn-warning shadow-none"

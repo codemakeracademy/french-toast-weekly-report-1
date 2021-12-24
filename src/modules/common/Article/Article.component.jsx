@@ -14,7 +14,6 @@ import {MyCompany} from "../../MyCompany/MyCompany.component";
 import {Profile} from "../../EditMemberInformation/Profile";
 
 export const Article = () => {
-
     return (
         <div className="wrapper d-flex w-100 h-100">
             <Aside/>
@@ -57,6 +56,5 @@ export const Article = () => {
                 </article>
             </main>
         </div>
-
     )
 }

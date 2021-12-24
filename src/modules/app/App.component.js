@@ -19,6 +19,7 @@ export function App() {
     const [createNewMember, setCreateNewMember] = useState()
     const [updateCompany, setUpdateCompany] = useState()
     const [updateMember, setUpdateMember] = useState()
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         if (user && user.sub) {
@@ -31,27 +32,35 @@ export function App() {
                 console.error(error)
             }
         }
-    }, [user, createNewCompany,createNewMember])
+    }, [user, createNewCompany, createNewMember])
 
     useEffect(async () => {
         if (user && user.sub) {
             try {
                 const data = await appService.getUser(user.sub)
                 await setCurrentUser(data)
+                setLoading(false)
             } catch (error) {
                 console.error(error)
             }
         }
-    }, [user, updateCompany, updateMember]);
+    }, [user, updateCompany, updateMember, createNewMember, createNewCompany]);
 
-    if (isAuthenticated && hasCompany && (isLoading || !currentUser)) {
+    if (isAuthenticated && hasCompany && (isLoading || loading)) {
         return (
             <Loader/>
         )
     }
 
     return (
-        <Context.Provider value={{currentUser, setUpdateMember, setUpdateCompany,setCreateNewMember, createNewMember}}>
+        <Context.Provider value={{
+            currentUser,
+            setUpdateMember,
+            setUpdateCompany,
+            setCreateNewMember,
+            setCreateNewCompany,
+            createNewMember
+        }}>
             {currentLocation.pathname === "/invite"
                 ? (isAuthenticated && hasCompany
                     ? <Article/>
@@ -61,7 +70,7 @@ export function App() {
                 : (isAuthenticated && hasCompany)
                     ? <Article/>
                     : (isAuthenticated && !hasCompany)
-                        ? <NewCompany onButton={setCreateNewCompany}/>
+                        ? <NewCompany/>
                         : <WelcomePage/>
             }
         </Context.Provider>
