@@ -9,10 +9,8 @@ export const InvitePage = () => {
     const currentLocation = window.location;
 
     const onClickButton = () => {
-        sessionStorage.setItem("href", currentLocation.search)
-
-        loginWithRedirect().then(r => r )
-
+        sessionStorage.setItem("href", currentLocation.search.substr(1))
+        loginWithRedirect()
     }
     return(
         <div>

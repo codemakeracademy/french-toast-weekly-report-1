@@ -1,47 +1,51 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Success} from "./Succsess.component";
-import {Header} from "../common/Header/Header.component";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
+import {Header} from "../common/Header/Header.component";
+import React, {useContext} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
+import {linkToObject} from "../common/util/function";
+import {Loader} from "../common/Loader/Loader.component";
+import {useAuth0} from "@auth0/auth0-react";
+import {createNewTeamMember} from "./NewTeamMember.service";
 import {Context} from "../app/App.component";
-import {createLink} from "../common/util/function";
 
-export const InviteYourTeam = () => {
-    const {currentUser} = useContext(Context);
+export const NewTeamMember = () => {
+    const {setCreateNewMember} = useContext(Context);
 
-    const [success, setSuccess] = useState(false);
-    const [inviteLink, setInviteLink] = useState(null)
-
-    useEffect(async () => {
-        if(inviteLink) {
-            console.log(inviteLink)
-        }
-    }, [inviteLink]);
-
+    const {user} = useAuth0();
+    const newMember = sessionStorage.getItem("href")
+    const obj = linkToObject(newMember)
 
 
     const onSubmit = async (values, {setSubmitting}) => {
-        setSuccess(true);
-        await setInviteLink("http://localhost:3000/invite?" + (createLink(values)))
+        await createNewTeamMember(values, obj.teamMemberTo)
+        await setCreateNewMember(true)
         setSubmitting(false);
     }
-    return (
-        <>
-            <HelmetComponent title="Invite Your Team"/>
+
+    if(!obj || !user) {
+        return <Loader/>
+    }
+
+
+    return(
+        <div>
+            <HelmetComponent title="Weekly Team Report"/>
             <Header>
-                <h1>Invite Your Team</h1>
+                <div>
+                    <h1 className="header-title">Weekly Team Report</h1>
+                </div>
             </Header>
             <div className="row justify-content-md-center">
                 <div className="col-md-6">
-                    {success && <Success/>}
                     <div className="row mt-5">
                         <Formik
                             initialValues={{
-                                FirstName: '',
-                                LastName: '',
-                                Mail: '',
-                                companyId: currentUser.companyId,
-                                teamMemberTo: currentUser.teamMemberId
+                                FirstName: obj.FirstName,
+                                LastName: obj.LastName,
+                                Title: '',
+                                Mail: user.email,
+                                Subject: user.sub,
+                                CompanyId: obj.companyId
                             }}
                             onSubmit={onSubmit}
                         >
@@ -49,8 +53,6 @@ export const InviteYourTeam = () => {
                                 <Form>
                                     <div className="card">
                                         <div className="card-body">
-                                            <h6 className="card-title">Enter the team member you'd like to invite</h6>
-                                            <p>Don't worry! You'll be able to add more team members later.</p>
                                             <div className="form-group">
                                                 <label htmlFor="FirstName" className="form-label">
                                                     First Name
@@ -68,19 +70,19 @@ export const InviteYourTeam = () => {
                                                 <ErrorMessage name="LastName" component="div"/>
                                             </div>
                                             <div className="form-group">
-                                                <label htmlFor="mail" className="form-label">
-                                                    Email
+                                                <label htmlFor="Title" className="form-label">
+                                                    Title
                                                 </label>
-                                                <Field className="form-control border-2 shadow-none" type="email"
-                                                       name="Mail"/>
-                                                <ErrorMessage name="Mail" component="div"/>
+                                                <Field className="form-control border-2 shadow-none" type="text"
+                                                       name="Title"/>
+                                                <ErrorMessage name="Title" component="div"/>
                                             </div>
                                             <div className="form-group">
                                                 <button
                                                     className="btn btn-warning shadow-none"
                                                     type="submit"
                                                     disabled={isSubmitting}
-                                                >Invite
+                                                >Continue
                                                 </button>
                                             </div>
                                         </div>
@@ -91,6 +93,8 @@ export const InviteYourTeam = () => {
                     </div>
                 </div>
             </div>
-        </>
-    );
-};
+
+
+        </div>
+    )
+}

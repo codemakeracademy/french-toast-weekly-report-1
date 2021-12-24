@@ -5,7 +5,7 @@ import WelcomePage from "../WelcomePage/WelcomePage";
 import {InvitePage} from "../InvitePage/InvitePage.component";
 import {NewCompany} from "../MyCompany/NewCompany.component";
 import * as appService from "./App.service";
-import {newTeamMember} from "../InvitePage/newTeamMember";
+import {NewTeamMember} from "../InvitePage/NewTeamMember.component";
 import {Loader} from "../common/Loader/Loader.component";
 
 export const Context = React.createContext(null)
@@ -15,7 +15,8 @@ export function App() {
     const {isAuthenticated, user, isLoading} = useAuth0();
     const currentLocation = window.location;
     const [hasCompany, setHasCompany] = useState(false)
-    const [createNew, setCreateNew] = useState()
+    const [createNewCompany, setCreateNewCompany] = useState()
+    const [createNewMember, setCreateNewMember] = useState()
     const [updateCompany, setUpdateCompany] = useState()
     const [updateMember, setUpdateMember] = useState()
 
@@ -26,13 +27,11 @@ export function App() {
                     .then(res => {
                         res ? setHasCompany(true) : setHasCompany(false);
                     })
-
             } catch (error) {
                 console.error(error)
             }
         }
-
-    }, [user, createNew])
+    }, [user, createNewCompany,createNewMember])
 
     useEffect(async () => {
         if (user && user.sub) {
@@ -45,22 +44,25 @@ export function App() {
         }
     }, [user, updateCompany, updateMember]);
 
-    if (isAuthenticated && (isLoading || !currentUser))  {
+
+    if (isAuthenticated && hasCompany && (isLoading || !currentUser)) {
         return (
             <Loader/>
         )
     }
 
     return (
-        <Context.Provider value={{currentUser, setUpdateMember, setUpdateCompany}}>
+        <Context.Provider value={{currentUser, setUpdateMember, setUpdateCompany,setCreateNewMember, createNewMember}}>
             {currentLocation.pathname === "/invite"
-                ? (isAuthenticated
-                    ? newTeamMember() && <Article/>
-                    : <InvitePage/>)
+                ? (isAuthenticated && hasCompany
+                    ? <Article/>
+                    : (isAuthenticated && !hasCompany)
+                        ? <NewTeamMember/>
+                        : <InvitePage/>)
                 : (isAuthenticated && hasCompany)
                     ? <Article/>
                     : (isAuthenticated && !hasCompany)
-                        ? <NewCompany onButton={setCreateNew}/>
+                        ? <NewCompany onButton={setCreateNewCompany}/>
                         : <WelcomePage/>
             }
         </Context.Provider>
