@@ -14,7 +14,7 @@ export const InviteYourTeam = () => {
 
     useEffect(async () => {
         if (inviteLink) {
-            alert(inviteLink)
+            prompt("please press ctrl+c to copy the Link with invitation", inviteLink)
         }
     }, [inviteLink]);
 
