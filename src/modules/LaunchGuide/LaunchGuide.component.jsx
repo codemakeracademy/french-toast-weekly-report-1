@@ -5,10 +5,8 @@ import {Header} from "../common/Header/Header.component";
 import logoPng from "../../img/logo.png";
 import {HelmetComponent} from "../common/Helmet/Helmet.component";
 
-
-
-
 export const LaunchGuide = () => {
+
     return (
         <>
             <HelmetComponent title="Launch Guide"/>
