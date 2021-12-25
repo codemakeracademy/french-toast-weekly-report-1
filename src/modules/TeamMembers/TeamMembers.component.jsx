@@ -9,24 +9,16 @@ import {getJoinDate} from "../common/Utiles/function";
 
 export const TeamMembers = () => {
     const {currentUser} = useContext(Context);
-
-
     const [teamMembers, setTeamMembers] = useState(null);
-
     const dateTitle = getJoinDate(currentUser.joinDate)
 
-    useEffect(() => {
-        async function fetchData() {
+    useEffect(async () => {
             try {
                 const teamMemberResponse = await getTeamMembers(currentUser.companyId)
                 setTeamMembers(teamMemberResponse)
-
             } catch (error) {
                 console.error(error)
             }
-        }
-        fetchData()
-
     }, [])
     return (
         <>
