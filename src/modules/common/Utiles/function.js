@@ -14,5 +14,21 @@ export const getMembersName = (member)=> {
     return member.firstName
 }
 
+export const createLink = (values) => {
+    let obj = values
+    let urlParam = []
+    for (let i in obj) {urlParam.push(encodeURI(i) + "=" + encodeURI(obj[i]))}
+    return "" + urlParam.join("&")
+}
+
+export const linkToObject = (link) => {
+    let array = link.split("&")
+    let obj = {}
+    for (let i = 0; i < array.length; i++) {
+        obj[array[i].split("=")[0]] = array[i].split("=")[1]
+    }
+    return obj
+}
+
 // export const baseUrl = 'http://localhost:3000';
 export const baseUrl = 'https://weekly-report-01.digitalocean.ankocorp.com';

@@ -11,7 +11,7 @@ import { api } from "../api/api.service";
 import { WeeklyOlderReports } from "./WeeklyReportHistory.OlderReports";
 import { Loader } from "../common/Loader/Loader.component";
 import { Context } from "../app/App.component";
-import { baseUrl } from "../common/util/function";
+import { baseUrl } from "../common/Utiles/function";
 
 export const WeeklyReportHistory = () => {
     const [activeTeam, setActiveTeam] = useState(1);

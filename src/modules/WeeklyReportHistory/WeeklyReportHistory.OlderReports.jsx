@@ -4,7 +4,7 @@ import { WeeksHeader } from "./WeeksHeader.component";
 import { weekAgoStore } from "../../store/weekAgoStore";
 import { WeeklyReportHistoryCard } from "./WeeklyReportHistoryCard.component";
 import { WeeklyReportHistoryCardAverage } from "./WeeklyReportHistoryCardAverage.component";
-import { baseUrl } from "../common/util/function";
+import { baseUrl } from "../common/Utiles/function";
 
 export const WeeklyOlderReports = ({ reports, members, activePeriod, activeMoraleFilter, setActiveMoraleFilter }) => {
     const teamMembers = members;

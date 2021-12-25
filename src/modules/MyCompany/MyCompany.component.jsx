@@ -5,7 +5,7 @@ import {Header} from "../common/Header/Header.component";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {changeNameCompany} from "./MyCompany.service";
 import {Context} from "../app/App.component";
-import {getJoinDate} from "../common/util/function";
+import {getJoinDate} from "../common/Utiles/function";
 
 export const MyCompany = () => {
 

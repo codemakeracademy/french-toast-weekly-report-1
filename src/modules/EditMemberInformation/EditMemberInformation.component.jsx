@@ -7,7 +7,7 @@ import {Form, Formik} from "formik";
 import {TextInput} from "../common/Formik/textInput.component";
 import * as Yup from "yup";
 import {changeMemberInfo} from "./EditMemberInformation.service";
-import {getMemberInitials, getMembersFullName, getMembersName} from "../common/util/function";
+import {getMemberInitials, getMembersFullName, getMembersName} from "../common/Utiles/function";
 import {Context} from "../app/App.component";
 
 

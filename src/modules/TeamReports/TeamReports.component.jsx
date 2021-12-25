@@ -10,7 +10,7 @@ import { WeeklyOlderReports } from "../WeeklyReportHistory/WeeklyReportHistory.O
 import getWeeklyReportHistoryToUser from "../TeamReports/TeamReports.service";
 import { Context } from "../app/App.component";
 import moment from "moment";
-import { baseUrl } from "../common/util/function";
+import { baseUrl } from "../common/Utiles/function";
 
 export const TeamReports = () => {
     const [activeTeam, setActiveTeam] = useState(0);
