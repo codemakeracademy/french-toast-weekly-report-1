@@ -13,3 +13,6 @@ export const getMembersFullName = (member) => {
 export const getMembersName = (member)=> {
     return member.firstName
 }
+
+// export const baseUrl = 'http://localhost:3000';
+export const baseUrl = 'https://weekly-report-01.digitalocean.ankocorp.com';
