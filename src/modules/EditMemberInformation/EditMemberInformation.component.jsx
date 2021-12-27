@@ -25,7 +25,7 @@ export const EditMemberInformation = ({ member, edit }) => {
 
     const onClickEdit = (e, data) => {
         setShowEdit(true);
-        setCurrentTitle(e.target.text);
+        setCurrentTitle(e.target.value);
         setModalData(data);
     };
 
@@ -113,7 +113,7 @@ export const EditMemberInformation = ({ member, edit }) => {
                                 ))
                             : null}
                         </div>
-                        <button onClick={(e) => onClickEdit(e, reportFromTo[1])} className="btn btn-outline-dark border-2 fw-bold" data-bs-toggle="modal" role="button" disabled={edit}>
+                        <button onClick={(e) => onClickEdit(e, reportFromTo[1])} className="btn btn-outline-dark border-2 fw-bold" data-bs-toggle="modal" value={"Edit Leader(s)"} role="button" disabled={edit}>
                             Edit Leader(s)
                         </button>
                     </div>
@@ -128,7 +128,7 @@ export const EditMemberInformation = ({ member, edit }) => {
                                   ))
                             : null}
                         </div>
-                        <button onClick={(e) => onClickEdit(e, reportFromTo[0])} className="btn btn-outline-dark border-2 fw-bold" data-bs-toggle="modal" role="button" disabled={edit}>
+                        <button onClick={(e) => onClickEdit(e, reportFromTo[0])} className="btn btn-outline-dark border-2 fw-bold" data-bs-toggle="modal" value={"Edit Member(s)"} role="button" disabled={edit}>
                             Edit Member(s)
                         </button>
                     </div>
