@@ -8,16 +8,13 @@ import { createLink, baseUrl } from "../common/Utiles/function";
 import { TextInput } from "../common/Formik/textInput.component";
 import * as Yup from "yup";
 import { api } from "../api/api.service";
+import { Message } from "../common/Message/Message.component";
+import { CSSTransition } from "react-transition-group";
 
 export const InviteYourTeam = () => {
     const { currentUser } = useContext(Context);
     const [success, setSuccess] = useState(false);
-
-    // useEffect(async () => {
-    //     if (inviteLink) {
-    //         prompt("please press ctrl+c to copy the Link with invitation", inviteLink);
-    //     }
-    // }, [inviteLink, success]);
+    const [showMessage, setShowMessage] = useState(false);
 
     const onSubmit = async (values, { setSubmitting, resetForm }) => {
         const inviteLink = baseUrl + "/invite?" + createLink(values);
@@ -32,10 +29,17 @@ export const InviteYourTeam = () => {
                 setSuccess(true);
                 setSubmitting(false);
                 resetForm();
+                setShowMessage(true);
+                setTimeout(() => {
+                    setShowMessage(false);
+                }, 4000);
             });
     };
     return (
         <>
+            <CSSTransition in={showMessage} classNames="message" timeout={300} unmountOnExit>
+                <Message text="Success! You have invited a new member!" />
+            </CSSTransition>
             <HelmetComponent title="Invite Your Team" />
             <Header>
                 <h1>Invite Your Team</h1>
